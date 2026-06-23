@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -6,7 +7,7 @@
 <title>Pre-Workout Protokoll</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#F5F6F9; --surface:#FFFFFF; --ink:#0F1116; --muted:#646B7A; --faint:#9AA0AD;
@@ -25,26 +26,25 @@
   .wrap{max-width:760px;margin:0 auto}
   ::selection{background:var(--acc);color:#fff}
 
-  /* HERO */
-  header{padding:78px 0 30px}
-  .tag-top{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc-ink);background:var(--acc-soft);padding:7px 13px;border-radius:999px;margin-bottom:26px}
+  header{padding:78px 0 28px}
+  .tag-top{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc-ink);background:var(--acc-soft);padding:7px 13px;border-radius:999px;margin-bottom:24px}
   .tag-top .d{width:6px;height:6px;border-radius:50%;background:var(--acc)}
-  h1{font-family:var(--disp);font-weight:700;font-size:clamp(44px,9vw,80px);line-height:.98;letter-spacing:-.025em}
+  h1{font-family:var(--disp);font-weight:700;font-size:clamp(44px,9vw,78px);line-height:.98;letter-spacing:-.025em}
   h1 .g{background:linear-gradient(95deg,var(--acc),var(--acc-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .lede{margin-top:22px;font-size:17px;color:var(--muted);max-width:54ch}
+  .lede{margin-top:20px;font-size:17px;color:var(--muted);max-width:54ch}
 
-  section{margin-top:54px}
+  section{margin-top:46px}
   .head{display:flex;align-items:center;gap:13px;margin-bottom:6px}
-  .head .ix{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--acc);background:var(--acc-soft);width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center}
-  h2{font-family:var(--disp);font-weight:600;font-size:clamp(22px,4vw,29px);letter-spacing:-.015em}
-  .sub{color:var(--muted);font-size:15px;margin:8px 0 22px;max-width:62ch}
+  .head .ix{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--acc);background:var(--acc-soft);width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:none}
+  h2{font-family:var(--disp);font-weight:600;font-size:clamp(22px,4vw,28px);letter-spacing:-.015em}
+  .sub{color:var(--muted);font-size:15px;margin:8px 0 20px;max-width:62ch}
 
-  .card{background:var(--surface);border-radius:22px;box-shadow:var(--shadow);padding:26px 24px}
+  .card{background:var(--surface);border-radius:22px;box-shadow:var(--shadow);padding:24px 22px}
   .card+.card{margin-top:14px}
 
   /* CONTROLS */
-  .ctrls{display:grid;grid-template-columns:1fr 1fr;gap:28px 36px;margin-bottom:8px}
-  .cl{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
+  .ctrls{display:grid;grid-template-columns:1fr 1fr;gap:26px 36px}
+  .cl{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:13px}
   .cl .lbl{font-size:13px;color:var(--muted);font-weight:500}
   .cl .cv{font-family:var(--mono);font-weight:700;font-size:14px;color:var(--acc-ink)}
   input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;background:var(--hair);outline:none}
@@ -60,11 +60,22 @@
   .caf .big{font-family:var(--mono);font-weight:700;font-size:20px;color:var(--acc-ink)}
   .caf .sm{font-size:12px;color:var(--muted)}
 
-  .agewarn{margin-top:24px;padding:15px 17px;border-radius:14px;background:var(--acc-soft);font-size:13.5px;color:#3B3568;line-height:1.5}
+  /* OPTIONS (collapsible) */
+  .optbox{margin-top:20px;border-top:1px solid var(--hair);padding-top:6px}
+  .optbox>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:12px 0 4px;font-size:13px;font-weight:600;color:var(--muted)}
+  .optbox>summary::-webkit-details-marker{display:none}
+  .optbox>summary .chev{margin-left:auto;transition:transform .2s;color:var(--faint)}
+  .optbox[open]>summary .chev{transform:rotate(180deg)}
+  .opts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px 22px;padding:14px 0 4px}
+  .opt-l{font-size:12px;color:var(--muted);font-weight:500;margin-bottom:9px}
+  .seg{display:flex;background:var(--bg);border-radius:11px;padding:3px;gap:2px}
+  .seg button{flex:1;border:none;background:transparent;padding:8px 4px;border-radius:9px;font-family:var(--body);font-size:12.5px;font-weight:500;color:var(--muted);cursor:pointer;transition:all .15s;white-space:nowrap}
+  .seg button.on{background:var(--surface);color:var(--acc-ink);box-shadow:var(--shadow-sm);font-weight:600}
+
+  .agewarn{margin-top:18px;padding:14px 16px;border-radius:14px;background:var(--acc-soft);font-size:13.5px;color:#3B3568;line-height:1.5}
   .agewarn.alert{background:#FFEDE6;color:#9A3412}
   .agewarn b{font-weight:600}
 
-  /* SUMMARY STRIP */
   .summary{display:flex;flex-wrap:wrap;gap:14px;margin:16px 0}
   .stat{flex:1;min-width:130px;background:var(--surface);border-radius:18px;box-shadow:var(--shadow-sm);padding:18px 20px}
   .stat .v{font-family:var(--mono);font-weight:700;font-size:26px;letter-spacing:-.01em}
@@ -73,46 +84,66 @@
   .stat.hl .v{color:#fff} .stat.hl .l{color:#A7ACBA}
   .stat .l{font-size:12px;color:var(--muted);margin-top:5px}
 
-  /* COMPOSITION */
-  .comp{display:flex;height:12px;border-radius:8px;overflow:hidden;gap:2px;margin:2px 0 10px}
-  .comp span{height:100%;border-radius:3px}
-  .compleg{display:flex;flex-wrap:wrap;gap:7px 16px;font-size:11.5px;color:var(--muted);margin-bottom:6px}
-  .compleg i{width:9px;height:9px;border-radius:3px;display:inline-block;margin-right:6px;vertical-align:middle}
-
-  /* COST TABLE */
-  table.grid{width:100%;border-collapse:collapse;font-size:14px;margin-top:4px}
+  table.grid{width:100%;border-collapse:collapse;font-size:14px}
   table.grid th{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:500;text-align:right;padding:0 0 12px}
   table.grid th:first-child{text-align:left}
   table.grid td{padding:13px 0;border-top:1px solid var(--hair);text-align:right;font-family:var(--mono);font-weight:500}
   table.grid td:first-child{text-align:left;font-family:var(--body);font-weight:600}
   table.grid td .src{display:block;font-family:var(--mono);font-size:10px;color:var(--faint);font-weight:400}
-  .price-in{width:60px;border:1px solid var(--hair);border-radius:9px;padding:7px 8px;text-align:right;font-family:var(--mono);font-size:13px;background:var(--bg);color:var(--ink)}
+  .price-in{width:64px;border:1px solid var(--hair);border-radius:9px;padding:6px 7px;text-align:right;font-family:var(--mono);font-size:12px;background:var(--bg);color:var(--ink)}
   .price-in:focus{outline:none;border-color:var(--acc);background:#fff;box-shadow:0 0 0 3px var(--acc-soft)}
+  .price-in.ok{border-color:#36A65A;background:#E7F7EC}
+  .price-in.mid{border-color:#C98A0E;background:#FBF1D8}
+  .price-in.hi{border-color:#D5402B;background:#FBE6E1}
+  .ampleg{display:flex;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:12px}
+  .ampleg i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:middle}
+  .setgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:12px 0 2px}
+  .setf{display:flex;flex-direction:column;gap:5px}
+  .setf label{font-size:11px;color:var(--muted)}
+  .setf .ig{display:flex;align-items:center;gap:4px;background:var(--bg);border:1px solid var(--hair);border-radius:9px;padding:0 9px}
+  .setf .ig input{width:100%;border:none;background:transparent;padding:8px 0;font-family:var(--mono);font-size:13px;color:var(--ink);-moz-appearance:textfield}
+  .setf .ig input::-webkit-outer-spin-button,.setf .ig input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+  .setf .ig input:focus{outline:none}
+  .setf .ig .u{font-size:11px;color:var(--faint);font-family:var(--mono)}
+  .setlbl{font-size:12px;color:var(--muted);font-weight:600;margin-top:14px}
   table.grid tfoot td{border-top:2px solid var(--ink);font-weight:700;padding-top:14px}
   .cost{color:var(--acc-ink);font-weight:700}
   .note-row{font-size:12px;color:var(--muted);margin-top:16px;line-height:1.55}
   .note-row code{font-family:var(--mono);background:var(--acc-soft);padding:1px 6px;border-radius:5px;color:var(--acc-ink)}
 
-  /* LISTS */
   .list .r{display:grid;grid-template-columns:1fr auto;gap:3px 18px;padding:15px 0;border-top:1px solid var(--hair);align-items:baseline}
   .list .r:first-child{border-top:none}
   .list .r .n{font-weight:600;font-size:15px}
   .list .r .d{grid-column:1/2;color:var(--muted);font-size:13px}
   .list .r .v{font-family:var(--mono);font-weight:700;font-size:15px;text-align:right;white-space:nowrap}
   .list .r .v.live{color:var(--acc-ink)}
+  .list .r.muted{opacity:.32;filter:grayscale(.4)}
   .foot{font-size:12px;color:var(--muted);padding-top:14px}
 
+  /* REFERENZ divider */
+  .divider{display:flex;align-items:center;gap:14px;margin:50px 0 6px}
+  .divider span{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+  .divider .line{flex:1;height:1px;background:var(--hair)}
+
+  /* ACCORDION */
+  .acc{background:var(--surface);border-radius:18px;box-shadow:var(--shadow-sm);margin-top:12px;overflow:hidden}
+  .acc>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:13px;padding:18px 22px;font-family:var(--disp);font-weight:600;font-size:18px}
+  .acc>summary::-webkit-details-marker{display:none}
+  .acc>summary .chev{margin-left:auto;color:var(--faint);transition:transform .2s}
+  .acc[open]>summary .chev{transform:rotate(180deg)}
+  .acc .body{padding:0 22px 22px}
+
   .mech{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .mech div{background:var(--surface);border-radius:16px;box-shadow:var(--shadow-sm);padding:18px 18px;border-left:3px solid var(--acc)}
+  .mech div{background:var(--bg);border-radius:14px;padding:16px 16px;border-left:3px solid var(--acc)}
   .mech div:nth-child(2){border-left-color:var(--acc-2)}
   .mech div:nth-child(3){border-left-color:var(--acc-3)}
   .mech div:nth-child(4){border-left-color:#C5C1F8}
   .mech b{font-family:var(--disp);font-weight:600;font-size:16px}
   .mech span{display:block;color:var(--muted);font-size:13px;margin-top:4px}
-  .callout{margin-top:14px;padding:16px 18px;border-radius:16px;background:var(--acc-soft);font-size:14px;color:#3B3568}
+  .callout{margin-top:14px;padding:15px 17px;border-radius:14px;background:var(--acc-soft);font-size:14px;color:#3B3568}
   .callout b{color:var(--acc-ink)}
 
-  .tl .e{display:grid;grid-template-columns:90px 1fr;gap:22px;padding:16px 0;border-top:1px solid var(--hair)}
+  .tl .e{display:grid;grid-template-columns:108px 1fr;gap:20px;padding:16px 0;border-top:1px solid var(--hair)}
   .tl .e:first-child{border-top:none}
   .tl .t{font-family:var(--mono);font-weight:700;font-size:13px;color:var(--muted)}
   .tl .t small{display:block;color:var(--faint);font-weight:400;font-size:10px;text-transform:uppercase;letter-spacing:.06em;margin-top:3px}
@@ -138,15 +169,43 @@
   .alt span{color:var(--muted);font-size:13px;display:block;margin-top:3px}
   .legend{font-size:12px;color:var(--faint);margin-top:14px}
 
-  footer{margin-top:64px;padding:22px 24px;border-radius:18px;background:var(--surface);box-shadow:var(--shadow-sm);font-size:12px;color:var(--muted);line-height:1.6}
+  footer{margin-top:52px;padding:22px 24px;border-radius:18px;background:var(--surface);box-shadow:var(--shadow-sm);font-size:12px;color:var(--muted);line-height:1.6}
+
+
+  /* PRICE AMPEL */
+  .pricecell{display:flex;align-items:center;justify-content:flex-end;gap:7px}
+  .amp{width:9px;height:9px;border-radius:50%;background:var(--faint);flex:none}
+  .amp.g{background:#16A34A}.amp.a{background:#E0A100}.amp.r{background:#DC2626}
+  .amp-legend{display:flex;gap:16px;font-size:11px;color:var(--muted);margin-top:12px;flex-wrap:wrap}
+  .amp-legend span{display:flex;align-items:center;gap:6px}
+  .amp-legend i{width:8px;height:8px;border-radius:50%;display:inline-block}
+  .pricebasis{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .pb-l{font-size:13px;color:var(--muted);font-weight:500}
+  .pricebasis .seg{flex:none;width:240px}
+  .savings{margin-top:14px;padding:13px 15px;border-radius:12px;background:var(--acc-soft);font-size:13px;color:#3B3568}
+  .savings b{color:var(--acc-ink);font-family:var(--mono)}
+  /* ADVANCED PANEL */
+  .adv-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 30px;padding:8px 0 4px}
+  .adv-col h5{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:8px}
+  .adv-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--hair-2);font-size:13px;color:var(--ink)}
+  .adv-in{width:62px;border:1px solid var(--hair);border-radius:8px;padding:6px 7px;text-align:right;font-family:var(--mono);font-size:12px;background:var(--bg);color:var(--ink)}
+  .adv-in:focus{outline:none;border-color:var(--acc);background:#fff}
+  .adv-unit{display:inline-flex;align-items:center;gap:6px}
+  .adv-unit em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--faint);width:20px}
+  .adv-note{font-size:11px;color:var(--faint);margin-top:12px;line-height:1.5}
+  .adv-sep{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:600;margin:18px 0 4px;padding-top:14px;border-top:1px solid var(--hair)}
+  .adv-sep.first{margin-top:6px;padding-top:0;border-top:none}
 
   @media(max-width:600px){
     .ctrls{grid-template-columns:1fr;gap:22px}
+    .opts{grid-template-columns:1fr}
+    .adv-grid{grid-template-columns:1fr}
+    .setgrid{grid-template-columns:1fr 1fr}
     .mech{grid-template-columns:1fr}
-    .tl .e{grid-template-columns:70px 1fr;gap:14px}
+    .tl .e{grid-template-columns:92px 1fr;gap:14px}
     .card{padding:20px 16px}
   }
-  @media print{body{padding:0}body::before{display:none}.card,.stat,footer{box-shadow:none;border:1px solid var(--hair)}}
+  @media print{body{padding:0}body::before{display:none}.card,.stat,footer,.acc{box-shadow:none;border:1px solid var(--hair)}.acc .body{display:block!important}}
   @media(prefers-reduced-motion:no-preference){
     .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s}
     .reveal.in{opacity:1;transform:none}
@@ -165,7 +224,7 @@
   <!-- 01 -->
   <section class="reveal">
     <div class="head"><span class="ix">01</span><h2>Personalisieren &amp; Batch</h2></div>
-    <p class="sub">Das Körpergewicht steuert die Koffein-Startdosis (3 mg/kg), das Alter die Sicherheitshinweise. Die Gramm-Mengen der übrigen Stoffe sind feste Wirkdosen und bleiben konstant. Portionen entsprechen den „Servings".</p>
+    <p class="sub">Gewicht steuert die Koffeindosis, Alter die Sicherheitshinweise. Die Gramm-Mengen der übrigen Stoffe sind feste Wirkdosen. Portionen entsprechen den „Servings".</p>
 
     <div class="card">
       <div class="ctrls">
@@ -174,8 +233,44 @@
         <div><div class="cl"><span class="lbl">Portionen</span><span class="cv"><span id="pVal">10</span>×</span></div>
           <div class="stepper"><button type="button" id="minus">–</button><input id="portions" type="number" min="1" max="200" value="10"><button type="button" id="plus">+</button></div>
         </div>
-        <div><div class="cl"><span class="lbl">Koffein-Startdosis</span></div><div class="caf"><span class="big"><span id="cafLow">219</span> mg</span><span class="sm">bis <span id="cafHigh">438</span> · 3–6 mg/kg</span></div></div>
+        <div><div class="cl"><span class="lbl">Koffein-Dosis</span></div><div class="caf"><span class="big"><span id="cafVal">219</span> mg</span><span class="sm"><span id="cafTab">1</span> Tab · <span id="cafKk">3</span> mg/kg</span></div></div>
       </div>
+
+      <details class="optbox">
+        <summary>Feineinstellungen<span class="chev">▾</span></summary>
+        <div class="adv-sep first">Optionen</div>
+        <div class="opts">
+          <div><div class="opt-l">Koffein-Intensität</div><div class="seg" id="segCaf"><button type="button" data-v="3" class="on">niedrig</button><button type="button" data-v="4.5">mittel</button><button type="button" data-v="6">hoch</button></div></div>
+          <div><div class="opt-l">Cholinquelle</div><div class="seg" id="segChol"><button type="button" data-v="agpc" class="on">Alpha-GPC</button><button type="button" data-v="cdp">CDP-Cholin</button></div></div>
+          <div><div class="opt-l">L-Theanin</div><div class="seg" id="segThe"><button type="button" data-v="on" class="on">mit</button><button type="button" data-v="off">ohne</button></div></div>
+        </div>
+        <div class="adv-sep">Pulver-Reinheit (%)</div>
+        <div class="adv-grid">
+          <div class="adv-col">
+            <div class="adv-row"><span>L-Citrullin</span><span class="adv-unit"><input class="adv-in" type="number" min="1" max="100" id="pur0" value="100"><em>%</em></span></div>
+            <div class="adv-row"><span>Kreatin</span><span class="adv-unit"><input class="adv-in" type="number" min="1" max="100" id="pur1" value="100"><em>%</em></span></div>
+            <div class="adv-row"><span>Beta-Alanin</span><span class="adv-unit"><input class="adv-in" type="number" min="1" max="100" id="pur2" value="100"><em>%</em></span></div>
+          </div>
+          <div class="adv-col">
+            <div class="adv-row"><span>Betain (TMG)</span><span class="adv-unit"><input class="adv-in" type="number" min="1" max="100" id="pur3" value="100"><em>%</em></span></div>
+            <div class="adv-row"><span>L-Taurin</span><span class="adv-unit"><input class="adv-in" type="number" min="1" max="100" id="pur4" value="100"><em>%</em></span></div>
+            <div class="adv-row"><span>Alpha-GPC</span><span class="adv-unit"><input class="adv-in" type="number" min="1" max="100" id="purAgpc" value="99"><em>%</em></span></div>
+          </div>
+        </div>
+        <div class="adv-sep">mg pro Kapsel / Tablette</div>
+        <div class="adv-grid">
+          <div class="adv-col">
+            <div class="adv-row"><span>Koffein-Tablette</span><span class="adv-unit"><input class="adv-in" type="number" min="1" id="mgCaf" value="200"><em>mg</em></span></div>
+            <div class="adv-row"><span>L-Tyrosin</span><span class="adv-unit"><input class="adv-in" type="number" min="1" id="mgTyr" value="650"><em>mg</em></span></div>
+          </div>
+          <div class="adv-col">
+            <div class="adv-row"><span>L-Theanin</span><span class="adv-unit"><input class="adv-in" type="number" min="1" id="mgThe" value="375"><em>mg</em></span></div>
+            <div class="adv-row"><span>CDP-Cholin</span><span class="adv-unit"><input class="adv-in" type="number" min="1" id="mgCdp" value="250"><em>mg</em></span></div>
+          </div>
+        </div>
+        <p class="adv-note">Reinheit &lt;100 % erhöht abzuwiegende Menge und Kosten. Die mg-Werte berechnen die Stückzahl in „Separat dosieren“.</p>
+      </details>
+
       <div class="agewarn" id="ageWarn"></div>
     </div>
 
@@ -186,15 +281,16 @@
     </div>
 
     <div class="card">
-      <div class="comp" id="comp"></div>
-      <div class="compleg" id="compleg"></div>
+      <div class="pricebasis"><span class="pb-l">Preisbasis</span><div class="seg" id="segPrice"><button type="button" data-v="hansen" class="on">Hansen</button><button type="button" data-v="bulk">Bulk-Richtwert</button></div></div>
       <table class="grid">
         <thead><tr><th>Batch-Stoff</th><th>Menge</th><th>€/g</th><th>Kosten</th></tr></thead>
         <tbody id="rows"></tbody>
         <tfoot><tr><td>Summe</td><td id="sumGrams">205 g</td><td></td><td class="cost" id="sumCost">18,20 €</td></tr></tfoot>
       </table>
-      <p class="note-row">Begrenzer ist meist das Betain: <code>100 g = 40 Portionen</code>. Beta-Alanin führt Hansen nicht — der Default ist ein typischer Bulk-Preis. Hansen ist Premium; die €/g-Felder lassen sich überschreiben, um günstigere Bulk-Quellen zu vergleichen.</p>
+      <div class="savings" id="savings"></div>
+      <div class="amp-legend"><span><i style="background:#16A34A"></i>fair</span><span><i style="background:#E0A100"></i>ok</span><span><i style="background:#DC2626"></i>teuer</span><span>· Hansen = Shop-Preis · Bulk = Richtwert günstiger EU-Shops</span></div>
     </div>
+
   </section>
 
   <!-- 02 -->
@@ -202,14 +298,15 @@
     <div class="head"><span class="ix">02</span><h2>Separat dosieren</h2></div>
     <p class="sub">Kritisch oder hygroskopisch — gehört nie in den Batch, sondern frisch zur Portion.</p>
     <div class="card list">
-      <div class="r"><div class="n">Koffein</div><div class="d">aus dem Gewicht berechnet (3 mg/kg Start)</div><div class="v live" id="cafRow">219 mg</div></div>
-      <div class="r"><div class="n">Glycerol (GlycoPump)</div><div class="d">Hyperhydration — mit viel Wasser</div><div class="v">1 Portion</div></div>
-      <div class="r"><div class="n">Alpha-GPC (Pulver 99 %)</div><div class="d">Fokus + Mind-Muscle · Hansen €0,176/g → ≈0,07 €/Portion</div><div class="v">0,4 g</div></div>
-      <div class="r"><div class="n">L-Tyrosin (Kapsel)</div><div class="d">mentaler Fokus — z. B. 2× 750 mg</div><div class="v">1,5 g</div></div>
+      <div class="r"><div class="n">Koffein (Tablette)</div><div class="d">vit4ever 200 mg/Tab · aus dem Gewicht berechnet</div><div class="v live" id="cafRow">219 mg</div></div>
+      <div class="r"><div class="n">Glycerol (GlycoPump)</div><div class="d">Hyperhydration — mit viel Wasser (Pulver abwiegen)</div><div class="v">1 Portion</div></div>
+      <div class="r" id="rowAgpc"><div class="n">Alpha-GPC (Pulver)</div><div class="d">Power-Form, erste Wahl fürs Training · abwiegen</div><div class="v" id="agpcVal">0,4 g</div></div>
+      <div class="r" id="rowCdp"><div class="n">CDP-Cholin / Citicolin (Kapsel)</div><div class="d">Alternative zu Alpha-GPC (eher Kognition)</div><div class="v" id="cdpVal">1 Kapsel · 250 mg</div></div>
+      <div class="r"><div class="n">L-Tyrosin (Kapsel)</div><div class="d">mentaler Fokus · Ziel ~1500 mg</div><div class="v" id="tyrVal">2 Kapseln</div></div>
       <div class="r"><div class="n">Elektrolyte + Prise Salz</div><div class="d">1 Löffel Vit4ever (208 mg Na) + Salz</div><div class="v">~400 mg Na</div></div>
-      <div class="r"><div class="n">L-Theanin <em>(optional)</em></div><div class="d">glättet Koffein, gegen Nervosität</div><div class="v">200 mg</div></div>
+      <div class="r" id="rowThe"><div class="n">L-Theanin (Kapsel, optional)</div><div class="d">glättet Koffein · Ziel ~200 mg</div><div class="v" id="theVal">1 Kapsel</div></div>
     </div>
-    <p class="foot">Alpha-GPC und Glycerol zuletzt einrühren — beide ziehen extrem schnell Wasser.</p>
+    <p class="foot">Alpha-GPC und Glycerol zuletzt einrühren (ziehen schnell Wasser). Koffein, Tyrosin, Theanin und ggf. CDP-Cholin als Tablette/Kapsel zur Portion schlucken.</p>
   </section>
 
   <!-- 03 -->
@@ -223,66 +320,68 @@
     </div>
   </section>
 
-  <!-- 04 -->
+  <!-- 04 ZEITPLAN -->
   <section class="reveal">
-    <div class="head"><span class="ix">04</span><h2>Pump &amp; Hydration</h2></div>
-    <p class="sub">Vier Stoffe, vier verschiedene Mechanismen — sie addieren sich, statt sich zu überlappen.</p>
-    <div class="mech">
-      <div><b>Citrullin</b><span>NO über den Arginin-Weg</span></div>
-      <div><b>Glycerol</b><span>Hyperhydration — Wasser in Muskel &amp; Blut</span></div>
-      <div><b>Elektrolyte / Na</b><span>Retention, verstärkt Glycerol</span></div>
-      <div><b>Taurin</b><span>Zellvolumen</span></div>
-    </div>
-    <div class="callout"><b>Optionaler 3. NO-Weg:</b> Nitrat (z. B. OxyStorm, 1–2 g) wirkt über Nitrat→Nitrit→NO — eigenständig neben Citrullin. NO-Peak erst 2–3 h nach Einnahme, also früher nehmen, keine antibakterielle Mundspülung vorher. Eher Ausdauer-Nutzen.</div>
-  </section>
-
-  <!-- 05 -->
-  <section class="reveal">
-    <div class="head"><span class="ix">05</span><h2>Zeitplan · Trainingstag</h2></div>
+    <div class="head"><span class="ix">04</span><h2>Zeitplan · Trainingstag</h2></div>
+    <p class="sub">Zwei Schritte: Pulver früh anrühren und mitnehmen, kurz vor dem Training trinken und die Kapseln dazu schlucken.</p>
     <div class="card tl">
-      <div class="e"><div class="t">T‑2…3 h<small>optional</small></div><div><h4>Nitrat (falls genutzt)</h4><ul><li>NO-Peak erst nach 2–3 h — nur relevant mit OxyStorm.</li></ul></div></div>
-      <div class="e key"><div class="t">T‑45 min<small>Hauptdosis</small></div><div><h4>Alles in 400–500 ml Wasser</h4><ul><li><b>Batch-Beutel</b> — Citrullin, Kreatin, Beta-Alanin, Betain, Taurin</li><li><b>Koffein</b> · <b>Glycerol</b> · <b>Alpha-GPC</b> · <b>Tyrosin</b> · <b>Elektrolyte</b> + Salz · Theanin opt.</li></ul><span class="w">+ extra Glas Wasser — Glycerol braucht Flüssigkeit</span></div></div>
-      <div class="e"><div class="t">0 → Ende<small>Training</small></div><div><h4>Während des Trainings</h4><ul><li>Nur Wasser nachtrinken — unterstützt Pump.</li></ul></div></div>
-      <div class="e"><div class="t">Ruhetag<small>—</small></div><div><h4>Trainingsfreie Tage</h4><ul><li>Nur Kreatin (5 g) + Beta-Alanin (4 g) + Betain (2,5 g). Rest entfällt.</li></ul></div></div>
+      <div class="e"><div class="t">~2–3 h vorher<small>optional</small></div><div><h4>Nitrat (falls genutzt)</h4><ul><li>NO-Peak erst nach 2–3 h — nur relevant mit OxyStorm, dann vor dem Anrühren.</li></ul></div></div>
+      <div class="e"><div class="t">~2 h vorher<small>anrühren</small></div><div><h4>Flasche mischen &amp; mitnehmen</h4><ul><li><b>In ~0,7 l Wasser:</b> Batch (Citrullin, Kreatin, Beta-Alanin, Betain, Taurin) + Glycerol + Alpha-GPC-Pulver + Elektrolyte + Prise Salz</li><li>Gut schütteln, <b>kühl</b> mitnehmen (nicht in Sonne/warme Tasche)</li></ul><span class="w">Über 2 h in Lösung stabil — Kreatinverlust vernachlässigbar</span></div></div>
+      <div class="e key"><div class="t">~45 min vorher<small>einnehmen</small></div><div><h4>Trinken + Kapseln schlucken</h4><ul><li>Flasche <b>schütteln</b> und austrinken, danach ein Glas Wasser hinterher</li><li>Separat: <b>Koffein</b> 1 Tab · <b>L-Tyrosin</b> 2 Kap · <b>L-Theanin</b> 1 Kap (optional)</li><li>Falls CDP-Cholin statt Alpha-GPC: <b>1 Kapsel</b> hier schlucken</li></ul></div></div>
+      <div class="e"><div class="t">0 → Ende<small>Training</small></div><div><h4>Während des Trainings</h4><ul><li>Nur Wasser nachtrinken — unterstützt Pump &amp; Hyperhydration.</li></ul></div></div>
+      <div class="e"><div class="t">Ruhetag<small>—</small></div><div><h4>Trainingsfreie Tage</h4><ul><li>Nur Kreatin (5 g) + Beta-Alanin (4 g) + Betain (2,5 g), Timing egal. Rest entfällt.</li></ul></div></div>
     </div>
   </section>
 
-  <!-- 06 -->
-  <section class="reveal">
-    <div class="head"><span class="ix">06</span><h2>Mischen &amp; portionieren</h2></div>
-    <div class="card">
+  <!-- REFERENZ -->
+  <div class="divider"><span>Referenz</span><div class="line"></div></div>
+
+  <details class="acc">
+    <summary><span class="ix" style="font-family:var(--mono);font-size:12px;font-weight:700;color:var(--acc);background:var(--acc-soft);width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center">P</span>Pump &amp; Hydration<span class="chev">▾</span></summary>
+    <div class="body">
+      <p class="sub" style="margin-top:0">Vier Stoffe, vier Mechanismen — sie addieren sich, statt sich zu überlappen.</p>
+      <div class="mech">
+        <div><b>Citrullin</b><span>NO über den Arginin-Weg</span></div>
+        <div><b>Glycerol</b><span>Hyperhydration — Wasser in Muskel &amp; Blut</span></div>
+        <div><b>Elektrolyte / Na</b><span>Retention, verstärkt Glycerol</span></div>
+        <div><b>Taurin</b><span>Zellvolumen</span></div>
+      </div>
+      <div class="callout"><b>Optionaler 3. NO-Weg:</b> Nitrat (z. B. OxyStorm, 1–2 g) über Nitrat→Nitrit→NO, eigenständig neben Citrullin. NO-Peak erst 2–3 h nach Einnahme, keine antibakterielle Mundspülung vorher. Eher Ausdauer-Nutzen.</div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="ix" style="font-family:var(--mono);font-size:12px;font-weight:700;color:var(--acc);background:var(--acc-soft);width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center">M</span>Mischen &amp; portionieren<span class="chev">▾</span></summary>
+    <div class="body">
       <ol class="steps">
         <li>Batch-Pulver gründlich mischen und <b>direkt</b> in 20,5-g-Beutel abfüllen, solange homogen — nicht stehen lassen (Entmischung).</li>
         <li>Luftdicht und trocken lagern, Trockenmittel dazu (Beta-Alanin/Citrullin ziehen Feuchtigkeit).</li>
-        <li>Pro Training: 1 Beutel + Koffein + Alpha-GPC + Tyrosin + Glycerol + Elektrolyte + Salz in 400–500 ml Wasser.</li>
+        <li>Pro Training: 1 Beutel + Glycerol + Alpha-GPC + Elektrolyte + Salz ~2 h vorher in ~0,7 l Wasser anrühren; Koffein/Tyrosin/Theanin (und ggf. CDP-Cholin) als Tablette/Kapsel ~45 min vorher dazu.</li>
         <li>Zuckerfreies Aroma oder Geschmacks-EAA in den Batch — Citrullin/Beta-Alanin schmecken pur sauer.</li>
       </ol>
     </div>
-  </section>
+  </details>
 
-  <!-- 07 -->
-  <section class="reveal">
-    <div class="head"><span class="ix">07</span><h2>Wichtige Hinweise</h2></div>
-    <div class="card">
+  <details class="acc">
+    <summary><span class="ix" style="font-family:var(--mono);font-size:12px;font-weight:700;color:var(--acc);background:var(--acc-soft);width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center">!</span>Wichtige Hinweise<span class="chev">▾</span></summary>
+    <div class="body">
       <div class="note"><b>Koffein nie schätzen.</b> Feinwaage (0,01 g) oder fixe Tablette. Tagesmenge im Blick behalten (Kaffee zählt mit), nicht nach ~15 Uhr — Schlaf schlägt jeden Booster.</div>
       <div class="note"><b>Elektrolyte: nur 1 Löffel.</b> Ein zweiter bringt 360 mg Magnesiumcarbonat auf einmal → kann auf den Magen gehen. Besser 1 Löffel + Prise Salz.</div>
       <div class="note"><b>Hygroskopisch (Alpha-GPC, Glycerol):</b> nie in den Batch. Zügig abwiegen, Dose sofort schließen, erst kurz vorm Trinken zugeben.</div>
       <div class="note"><b>Cholin:</b> Alpha-GPC ist die Cholinquelle der Wahl — beste Form mit etwas Power-Evidenz. Nicht zusätzlich Bitartrat stapeln.</div>
       <div class="note"><b>Beta-Alanin braucht keine Pause.</b> Wirkt über Carnosin-Sättigung — kein Toleranzeffekt, kein Zyklen nötig.</div>
     </div>
-  </section>
+  </details>
 
-  <!-- 08 -->
-  <section class="reveal">
-    <div class="head"><span class="ix">08</span><h2>Fertigprodukt-Alternativen</h2></div>
-    <p class="sub">Transparent dosiert, ohne Proprietary Blends — als Option ohne Selbstmischen.</p>
-    <div class="card">
+  <details class="acc">
+    <summary><span class="ix" style="font-family:var(--mono);font-size:12px;font-weight:700;color:var(--acc);background:var(--acc-soft);width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center">F</span>Fertigprodukt-Alternativen<span class="chev">▾</span></summary>
+    <div class="body">
       <div class="alt"><b>ESN Crank</b><span>Einsteiger/moderat — 6 g Citrullin-Malat, 200 mg Koffein, Tyrosin, Taurin.</span></div>
       <div class="alt"><b>VAST V8 Total Energy</b><span>Fast der ganze Stack — 6 g Citrullin-Malat, Beta-Alanin, Betain, Alpha-GPC, 280 mg Koffein.</span></div>
       <div class="alt"><b>Naughty Boy Menace</b><span>High-Stim — 4 g Citrullin, 3,2 g Beta-Alanin, 600 mg Alpha-GPC, 350 mg Koffein.</span></div>
       <p class="legend">Bei allen: Kreatin (5 g) separat ergänzen.</p>
     </div>
-  </section>
+  </details>
 
   <footer>
     Kein ärztlicher Rat. Bei Bluthochdruck, Herz-Kreislauf-Problemen oder Medikamenten — besonders Koffein, Natrium und Nitrat (senkt Blutdruck) — vorher ärztlich abklären. Alpha-GPC nicht mit MAO-Hemmern kombinieren. Preise Stand der Abfrage, ohne Versand; Hansen Gratisversand ab 50 €.
@@ -292,12 +391,14 @@
 
 <script>
   const ING=[
-    {nm:'L-Citrullin', dose:7,   price:0.12, src:'Hansen',    col:'#4F46E5'},
-    {nm:'Kreatin-Monohydrat', dose:5, price:0.09, src:'Schätzung', col:'#6B63EC'},
-    {nm:'Beta-Alanin', dose:4,   price:0.03, src:'Bulk*',     col:'#8C85F1'},
-    {nm:'Betain (TMG)',dose:2.5, price:0.10, src:'Hansen',    col:'#ADA8F6'},
-    {nm:'L-Taurin',    dose:2,   price:0.08, src:'Hansen',    col:'#CDCAFA'},
+    {nm:'L-Citrullin', dose:7,   hansen:0.12, bulk:0.04, good:0.05, ok:0.09, pur:100},
+    {nm:'Kreatin-Monohydrat', dose:5, hansen:null, bulk:0.02, good:0.03, ok:0.05, pur:100},
+    {nm:'Beta-Alanin', dose:4,   hansen:null, bulk:0.03, good:0.04, ok:0.06, pur:100},
+    {nm:'Betain (TMG)',dose:2.5, hansen:0.10, bulk:0.04, good:0.06, ok:0.10, pur:100},
+    {nm:'L-Taurin',    dose:2,   hansen:0.08, bulk:0.025, good:0.04, ok:0.07, pur:100},
   ];
+  ING.forEach(x=>{x.price=(x.hansen!=null?x.hansen:x.bulk);});
+  const egg=v=>v.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:3});
   const DOSE_SUM=ING.reduce((a,b)=>a+b.dose,0);
   const eur=v=>v.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
   const eurp=v=>v.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2});
@@ -306,18 +407,25 @@
   const rows=$('rows'), pInput=$('portions');
 
   ING.forEach((x,i)=>{
+    const pct=Math.round(x.dose/DOSE_SUM*100);
+    const htxt=(x.hansen!=null?'Hansen '+egg(x.hansen):'Hansen n/a');
     const tr=document.createElement('tr');
-    tr.innerHTML='<td>'+x.nm+'<span class="src">'+x.src+'</span></td>'+
+    tr.innerHTML='<td>'+x.nm+'<span class="src">'+pct+'% Batch · '+htxt+' · Bulk ~'+egg(x.bulk)+'</span></td>'+
       '<td data-g="'+i+'"></td>'+
-      '<td><input class="price-in" type="number" step="0.01" min="0" value="'+x.price.toFixed(2)+'" data-p="'+i+'"></td>'+
+      '<td><div class="pricecell"><span class="amp" data-amp="'+i+'"></span><input class="price-in" type="number" step="0.01" min="0" value="'+x.price.toFixed(2)+'" data-p="'+i+'"></div></td>'+
       '<td class="cost" data-c="'+i+'"></td>';
     rows.appendChild(tr);
   });
-  const comp=$('comp'), compleg=$('compleg');
-  ING.forEach(x=>{
-    const s=document.createElement('span'); s.style.width=(x.dose/DOSE_SUM*100)+'%'; s.style.background=x.col; comp.appendChild(s);
-    const li=document.createElement('span'); li.innerHTML='<i style="background:'+x.col+'"></i>'+x.nm.split(' ')[0]+' '+x.dose.toLocaleString('de-DE')+'g'; compleg.appendChild(li);
-  });
+
+  let cafK=3, cholSrc='agpc', theanin=true;
+  function applyChol(){ $('rowAgpc').classList.toggle('muted',cholSrc!=='agpc'); $('rowCdp').classList.toggle('muted',cholSrc!=='cdp'); }
+  function applyThe(){ $('rowThe').classList.toggle('muted',!theanin); }
+  function seg(id,cb){const g=$(id);g.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;[...g.children].forEach(c=>c.classList.remove('on'));b.classList.add('on');cb(b.dataset.v);});}
+  seg('segCaf',v=>{cafK=parseFloat(v);calc();});
+  seg('segChol',v=>{cholSrc=v;applyChol();});
+  seg('segThe',v=>{theanin=(v==='on');applyThe();});
+  seg('segPrice',v=>{ING.forEach((x,i)=>{const p=(v==='bulk')?x.bulk:(x.hansen!=null?x.hansen:x.bulk);x.price=p;const inp=document.querySelector('[data-p="'+i+'"]');if(inp)inp.value=p.toFixed(2);});calc();});
+  applyChol(); applyThe();
 
   function ageNote(a){
     const w=$('ageWarn');
@@ -331,13 +439,31 @@
     let P=parseInt(pInput.value)||0; if(P<1)P=1;
     const W=parseInt($('weight').value), A=parseInt($('age').value);
     $('wVal').textContent=W; $('aVal').textContent=A; $('pVal').textContent=P;
-    const low=Math.round(W*3/5)*5, high=Math.round(W*6/5)*5;
-    $('cafLow').textContent=low; $('cafHigh').textContent=high; $('cafRow').textContent=low+'–'+high+' mg';
+    // advanced settings
+    ING.forEach((x,i)=>{const pe=$('pur'+i); if(pe) x.pur=Math.min(100,Math.max(1,parseFloat(pe.value)||100));});
+    const purAgpc=Math.min(100,Math.max(1,parseFloat($('purAgpc').value)||99));
+    const mgCaf=parseFloat($('mgCaf').value)||200, mgTyr=parseFloat($('mgTyr').value)||650, mgThe=parseFloat($('mgThe').value)||375, mgCdp=parseFloat($('mgCdp').value)||250;
+    // caffeine
+    const target=Math.round(W*cafK/5)*5;
+    const tabs=Math.max(1,Math.round(target/mgCaf));
+    $('cafVal').textContent=target; $('cafTab').textContent=tabs; $('cafKk').textContent=cafK.toLocaleString('de-DE');
+    $('cafRow').textContent=target+' mg · '+tabs+(tabs===1?' Tablette':' Tabletten');
+    // separate capsule counts
+    const aw=0.4*100/purAgpc; $('agpcVal').textContent=gram(aw);
+    const tyrC=Math.max(1,Math.round(1500/mgTyr)); $('tyrVal').textContent=tyrC+(tyrC===1?' Kapsel':' Kapseln');
+    const theC=Math.max(1,Math.round(200/mgThe)); $('theVal').textContent=theC+(theC===1?' Kapsel':' Kapseln');
+    const cdpC=Math.max(1,Math.round(250/mgCdp)); $('cdpVal').textContent=cdpC+(cdpC===1?' Kapsel':' Kapseln')+' · '+(cdpC*mgCdp)+' mg';
     ageNote(A);
     let tg=0,tc=0;
-    ING.forEach((x,i)=>{const g=x.dose*P,c=g*x.price;tg+=g;tc+=c;
+    ING.forEach((x,i)=>{const g=x.dose*P*100/x.pur,c=g*x.price;tg+=g;tc+=c;
       document.querySelector('[data-g="'+i+'"]').textContent=gram(g);
-      document.querySelector('[data-c="'+i+'"]').textContent=eur(c);});
+      document.querySelector('[data-c="'+i+'"]').textContent=eur(c);
+      const cls=x.price<=x.good?'g':(x.price<=x.ok?'a':'r');
+      document.querySelector('[data-amp="'+i+'"]').className='amp '+cls;});
+    let bulkTc=0; ING.forEach(x=>{bulkTc+=x.dose*P*100/x.pur*x.bulk;});
+    const sv=$('savings'); const diff=tc-bulkTc;
+    if(diff>0.005){sv.style.display='block';sv.innerHTML='Bei Bulk-Richtwerten kostet dieselbe Charge <b>'+eur(bulkTc)+'</b> — Sparpotenzial <b>'+eur(diff)+'</b> ('+Math.round(diff/tc*100)+' %). Rote Ampeln zeigen, wo sich der Wechsel am meisten lohnt.';}
+    else{sv.style.display='none';}
     $('totalGrams').innerHTML=Math.round(tg).toLocaleString('de-DE')+'<span class="u"> g</span>';
     $('sumGrams').textContent=gram(tg);
     $('sumCost').textContent=eur(tc);
@@ -350,6 +476,7 @@
   $('weight').addEventListener('input',calc);
   $('age').addEventListener('input',calc);
   rows.addEventListener('input',e=>{if(e.target.dataset.p!==undefined){ING[e.target.dataset.p].price=parseFloat(e.target.value)||0;calc()}});
+  document.querySelectorAll('.adv-in').forEach(el=>el.addEventListener('input',calc));
   calc();
 
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
