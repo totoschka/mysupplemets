@@ -16,6 +16,26 @@
     --shadow:0 1px 2px rgba(15,17,22,.04), 0 18px 40px -24px rgba(15,17,22,.22);
     --shadow-sm:0 1px 2px rgba(15,17,22,.05), 0 6px 18px -12px rgba(15,17,22,.18);
   }
+
+  html[data-theme="dark"]{
+    --bg:#0E1015; --surface:#181C24; --ink:#EAECF2; --muted:#9BA2B2; --faint:#6A7180;
+    --hair:#272C36; --hair-2:#1E232C;
+    --acc:#7872F2; --acc-ink:#B7B1FB; --acc-soft:#211E36; --acc-2:#9A93F5; --acc-3:#7E77E8;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 18px 40px -24px rgba(0,0,0,.7);
+    --shadow-sm:0 1px 2px rgba(0,0,0,.5), 0 6px 18px -12px rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+  @media(prefers-color-scheme:dark){
+    html[data-theme="auto"]{
+      --bg:#0E1015; --surface:#181C24; --ink:#EAECF2; --muted:#9BA2B2; --faint:#6A7180;
+      --hair:#272C36; --hair-2:#1E232C;
+      --acc:#7872F2; --acc-ink:#B7B1FB; --acc-soft:#211E36; --acc-2:#9A93F5; --acc-3:#7E77E8;
+      --shadow:0 1px 2px rgba(0,0,0,.5), 0 18px 40px -24px rgba(0,0,0,.7);
+      --shadow-sm:0 1px 2px rgba(0,0,0,.5), 0 6px 18px -12px rgba(0,0,0,.6);
+      color-scheme:dark;
+    }
+  }
+  html[data-theme="dark"] .card,html[data-theme="dark"] .stat:not(.hl),html[data-theme="dark"] .acc,html[data-theme="dark"] footer{border:1px solid var(--hair)}
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;padding:0 22px 100px;position:relative}
@@ -71,7 +91,7 @@
   .seg button{flex:1;border:none;background:transparent;padding:8px 4px;border-radius:9px;font-family:var(--body);font-size:12.5px;font-weight:500;color:var(--muted);cursor:pointer;transition:all .15s;white-space:nowrap}
   .seg button.on{background:var(--surface);color:var(--acc-ink);box-shadow:var(--shadow-sm);font-weight:600}
 
-  .agewarn{margin-top:18px;padding:14px 16px;border-radius:14px;background:var(--acc-soft);font-size:13.5px;color:#3B3568;line-height:1.5}
+  .agewarn{margin-top:18px;padding:14px 16px;border-radius:14px;background:var(--acc-soft);font-size:13.5px;color:var(--acc-ink);line-height:1.5}
   .agewarn.alert{background:#FFEDE6;color:#9A3412}
   .agewarn b{font-weight:600}
 
@@ -79,8 +99,9 @@
   .stat{flex:1;min-width:130px;background:var(--surface);border-radius:18px;box-shadow:var(--shadow-sm);padding:18px 20px}
   .stat .v{font-family:var(--mono);font-weight:700;font-size:26px;letter-spacing:-.01em}
   .stat .v .u{font-size:14px;color:var(--muted)}
-  .stat.hl{background:var(--ink);color:#fff}
-  .stat.hl .v{color:#fff} .stat.hl .l{color:#A7ACBA}
+  .stat.hl{background:linear-gradient(135deg,var(--acc),var(--acc-2));color:#fff;border:none}
+  .stat.hl .v{color:#fff} .stat.hl .l{color:rgba(255,255,255,.82)}
+  .stat.hl .v .u{color:rgba(255,255,255,.78)}
   .stat .l{font-size:12px;color:var(--muted);margin-top:5px}
 
   table.grid{width:100%;border-collapse:collapse;font-size:14px}
@@ -156,7 +177,7 @@
   .mech div:nth-child(4){border-left-color:#C5C1F8}
   .mech b{font-family:var(--disp);font-weight:600;font-size:16px}
   .mech span{display:block;color:var(--muted);font-size:13px;margin-top:4px}
-  .callout{margin-top:14px;padding:15px 17px;border-radius:14px;background:var(--acc-soft);font-size:14px;color:#3B3568}
+  .callout{margin-top:14px;padding:15px 17px;border-radius:14px;background:var(--acc-soft);font-size:14px;color:var(--acc-ink)}
   .callout b{color:var(--acc-ink)}
 
   .tl .e{display:grid;grid-template-columns:108px 1fr;gap:20px;padding:16px 0;border-top:1px solid var(--hair)}
@@ -200,7 +221,7 @@
   .pricebasis .seg{flex:none;width:300px}
   .seg button:disabled{opacity:.4;cursor:not-allowed}
   .livestatus{font-size:11px;color:var(--faint);font-family:var(--mono)}
-  .savings{margin-top:14px;padding:13px 15px;border-radius:12px;background:var(--acc-soft);font-size:13px;color:#3B3568}
+  .savings{margin-top:14px;padding:13px 15px;border-radius:12px;background:var(--acc-soft);font-size:13px;color:var(--acc-ink)}
   .savings b{color:var(--acc-ink);font-family:var(--mono)}
   /* ADVANCED PANEL */
   .adv-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 30px;padding:8px 0 4px}
@@ -224,7 +245,7 @@
   .budget label{display:flex;align-items:center;gap:8px}
   .budget input{width:72px;border:1px solid var(--hair);border-radius:9px;padding:7px 8px;font-family:var(--mono);font-size:13px;background:var(--bg);text-align:right;color:var(--ink)}
   .budget #budgetLine b{font-family:var(--mono)}
-  .profnote{margin-top:14px;padding:13px 15px;border-radius:12px;background:var(--acc-soft);font-size:13px;color:#3B3568;display:none}
+  .profnote{margin-top:14px;padding:13px 15px;border-radius:12px;background:var(--acc-soft);font-size:13px;color:var(--acc-ink);display:none}
   .tracker{margin-top:14px}
   .trk-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px;font-size:13px;color:var(--muted)}
   .trk-top label{display:flex;align-items:center;gap:8px}
@@ -256,6 +277,9 @@
     #labelCard td:last-child{text-align:right;font-family:var(--mono);font-weight:700}
     #labelCard .lc-foot{margin-top:14px;font-size:11px;color:#555}
   }
+  .topbar{display:flex;justify-content:flex-end;margin-bottom:20px}
+  .seg.theme{display:inline-flex;width:auto;flex:none}
+  .seg.theme button{flex:none;padding:7px 13px;font-size:12px}
   @media(max-width:600px){
     .ctrls{grid-template-columns:1fr;gap:22px}
     .opts{grid-template-columns:1fr}
@@ -276,6 +300,7 @@
 <div class="wrap">
 
   <header>
+    <div class="topbar"><div class="seg theme" id="segTheme"><button type="button" data-v="light">Hell</button><button type="button" data-v="dark">Dunkel</button><button type="button" data-v="auto" class="on">Auto</button></div></div>
     <span class="tag-top"><span class="d"></span>Dosier-Protokoll · Bodybuilding</span>
     <h1>Pre-Workout <span class="g">Stack</span></h1>
     <p class="lede">Eigenmischung mit klaren Wirkdosen — vormischbarer Batch, separat dosierte Stoffe und tägliche Sättigungs-Stoffe. Personalisierbar nach Gewicht, Alter und Portionszahl, mit Live-Kosten auf Hansen-Basis.</p>
@@ -564,6 +589,9 @@
   seg('segThe',v=>{theanin=(v==='on');applyThe();});
   seg('segPrice',v=>{ING.forEach((x,i)=>{let p;if(v==='live')p=(x.live!=null?x.live:(x.hansen!=null?x.hansen:x.bulk));else if(v==='bulk')p=x.bulk;else p=(x.hansen!=null?x.hansen:x.bulk);x.price=p;const inp=document.querySelector('[data-p="'+i+'"]');if(inp)inp.value=p.toFixed(2);});calc();});
   applyChol(); applyThe();
+  const _root=document.documentElement;
+  seg('segTheme',v=>_root.setAttribute('data-theme',v));
+  _root.setAttribute('data-theme','auto');
 
   function ageNote(a){
     const w=$('ageWarn');
