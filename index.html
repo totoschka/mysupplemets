@@ -280,6 +280,31 @@
   .topbar{display:flex;justify-content:flex-end;margin-bottom:20px}
   .seg.theme{display:inline-flex;width:auto;flex:none}
   .seg.theme button{flex:none;padding:7px 13px;font-size:12px}
+  .optbox.standalone{margin-top:14px;border-top:none;background:var(--surface);border-radius:18px;box-shadow:var(--shadow-sm);padding:4px 22px 18px}
+  .optbox.standalone>summary{padding:18px 0 6px;font-size:15px;font-family:var(--disp);font-weight:600;color:var(--ink)}
+  html[data-theme="dark"] .optbox.standalone{border:1px solid var(--hair)}
+  .adv-cap{font-size:11px;color:var(--faint);margin:-2px 0 10px;line-height:1.4}
+  .form-in,.sepform{border:1px solid var(--hair);border-radius:7px;padding:2px 6px;font-size:11px;font-family:var(--body);background:var(--surface);color:var(--muted);cursor:pointer}
+  .punit{font-family:var(--mono);font-size:11px;color:var(--faint);margin-left:5px}
+  .cust select.num{width:104px;font-family:var(--body);font-size:13px;cursor:pointer;color:var(--ink)}
+  .septag{display:inline-block;font-size:9px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);background:var(--hair-2);padding:2px 6px;border-radius:6px;margin-right:6px}
+  .adv-sub{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:600;margin:16px 0 8px}
+  .frow{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--hair-2)}
+  .fnm{font-size:13px;color:var(--ink)}
+  .seg.mini{display:inline-flex;width:auto;flex:none;padding:2px}
+  .seg.mini button{flex:none;padding:5px 10px;font-size:11px}
+  .fpar{display:inline-flex;align-items:center;gap:6px;justify-content:flex-end;min-width:96px}
+  .fpar input{width:54px;border:1px solid var(--hair);border-radius:8px;padding:5px 7px;text-align:right;font-family:var(--mono);font-size:12px;background:var(--bg);color:var(--ink)}
+  .fpar em{font-style:normal;font-family:var(--mono);font-size:10px;color:var(--faint)}
+  .fpar.muted2{color:var(--faint);font-size:11px;font-family:var(--mono);min-width:96px;justify-content:flex-end}
+  #sepWrap{margin-top:4px}
+  .sepitem{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:10px 0;border-top:1px solid var(--hair)}
+  .sepitem.off{opacity:.42}
+  .sepitem .inc{flex:1;min-width:150px}
+  .si-amt{font-family:var(--mono);font-size:13px;color:var(--muted);white-space:nowrap}
+  .sepitem .cost{font-family:var(--mono);font-weight:700;color:var(--acc-ink);min-width:64px;text-align:right}
+  .tobatch{border:1px solid var(--acc);background:var(--acc-soft);color:var(--acc-ink);border-radius:8px;padding:5px 10px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap}
+  .tobatch:hover{background:var(--acc);color:#fff}
   @media(max-width:600px){
     .ctrls{grid-template-columns:1fr;gap:22px}
     .opts{grid-template-columns:1fr}
@@ -288,6 +313,9 @@
     .mech{grid-template-columns:1fr}
     .tl .e{grid-template-columns:92px 1fr;gap:14px}
     .card{padding:20px 16px}
+    .optbox.standalone{padding:4px 16px 16px}
+    .frow{grid-template-columns:1fr auto}
+    .fpar,.fpar.muted2{grid-column:1/-1;justify-content:flex-start;min-width:0}
   }
   @media print{body{padding:0}body::before{display:none}.card,.stat,footer,.acc{box-shadow:none;border:1px solid var(--hair)}.acc .body{display:block!important}}
   @media(prefers-reduced-motion:no-preference){
@@ -303,7 +331,7 @@
     <div class="topbar"><div class="seg theme" id="segTheme"><button type="button" data-v="light">Hell</button><button type="button" data-v="dark">Dunkel</button><button type="button" data-v="auto" class="on">Auto</button></div></div>
     <span class="tag-top"><span class="d"></span>Dosier-Protokoll · Bodybuilding</span>
     <h1>Pre-Workout <span class="g">Stack</span></h1>
-    <p class="lede">Eigenmischung mit klaren Wirkdosen — vormischbarer Batch, separat dosierte Stoffe und tägliche Sättigungs-Stoffe. Personalisierbar nach Gewicht, Alter und Portionszahl, mit Live-Kosten auf Hansen-Basis.</p>
+    <p class="lede">Eigenmischung mit klaren Wirkdosen — vormischbarer Batch, separat dosierte Stoffe und tägliche Sättigungs-Stoffe. Personalisierbar nach Gewicht, Alter und Portionszahl, mit Kostenrechner – Hansen, Bulk-Richtwert oder Live-Preise.</p>
   </header>
 
   <!-- 01 -->
@@ -323,38 +351,27 @@
 
       <div class="budget"><label>Koffein sonst heute <input id="otherCaf" type="number" min="0" value="0"> mg</label><span id="budgetLine"></span></div>
 
-      <details class="optbox">
-        <summary>Feineinstellungen<span class="chev">▾</span></summary>
-        <div class="adv-sep first">Ziel &amp; Tag-Typ</div>
+
+      <div class="agewarn" id="ageWarn"></div>
+    </div>
+
+    <details class="optbox standalone">
+      <summary>Einstellungen · gelten für das ganze Protokoll<span class="chev">▾</span></summary>
+        <div class="adv-sep first">Ziel &amp; Tag-Typ</div><div class="adv-cap">Beeinflusst die Empfehlung unter dem Baukasten.</div>
         <div class="opts">
           <div><div class="opt-l">Ziel</div><div class="seg" id="segGoal"><button type="button" data-v="erhalt" class="on">Erhalt</button><button type="button" data-v="cut">Cut</button><button type="button" data-v="aufbau">Aufbau</button></div></div>
           <div><div class="opt-l">Tag-Typ</div><div class="seg" id="segDay"><button type="button" data-v="hyp" class="on">Hypertrophie</button><button type="button" data-v="kraft">Kraft</button><button type="button" data-v="aus">Ausdauer</button></div></div>
         </div>
-        <div class="adv-sep">Optionen</div>
+        <div class="adv-sep">Optionen</div><div class="adv-cap">Koffein, Cholinquelle &amp; Theanin wirken auch in „Separat dosieren“.</div>
         <div class="opts">
           <div><div class="opt-l">Koffein-Intensität</div><div class="seg" id="segCaf"><button type="button" data-v="3" class="on">niedrig</button><button type="button" data-v="4.5">mittel</button><button type="button" data-v="6">hoch</button></div></div>
           <div><div class="opt-l">Cholinquelle</div><div class="seg" id="segChol"><button type="button" data-v="agpc" class="on">Alpha-GPC</button><button type="button" data-v="cdp">CDP-Cholin</button></div></div>
           <div><div class="opt-l">L-Theanin</div><div class="seg" id="segThe"><button type="button" data-v="on" class="on">mit</button><button type="button" data-v="off">ohne</button></div></div>
         </div>
-        <div class="adv-sep">Pulver-Reinheit (%)</div>
-        <div class="adv-grid" id="purGrid"></div>
-        <div class="adv-grid"><div class="adv-col"><div class="adv-row"><span>Alpha-GPC (separat)</span><span class="adv-unit"><input class="adv-in" type="number" min="1" max="100" id="purAgpc" value="99"><em>%</em></span></div></div></div>
-        <div class="adv-sep">mg pro Kapsel / Tablette</div>
-        <div class="adv-grid">
-          <div class="adv-col">
-            <div class="adv-row"><span>Koffein-Tablette</span><span class="adv-unit"><input class="adv-in" type="number" min="1" id="mgCaf" value="200"><em>mg</em></span></div>
-            <div class="adv-row"><span>L-Tyrosin</span><span class="adv-unit"><input class="adv-in" type="number" min="1" id="mgTyr" value="650"><em>mg</em></span></div>
-          </div>
-          <div class="adv-col">
-            <div class="adv-row"><span>L-Theanin</span><span class="adv-unit"><input class="adv-in" type="number" min="1" id="mgThe" value="375"><em>mg</em></span></div>
-            <div class="adv-row"><span>CDP-Cholin</span><span class="adv-unit"><input class="adv-in" type="number" min="1" id="mgCdp" value="250"><em>mg</em></span></div>
-          </div>
-        </div>
-        <p class="adv-note">Reinheit &lt;100 % erhöht abzuwiegende Menge und Kosten. Die mg-Werte berechnen die Stückzahl in „Separat dosieren“.</p>
+        <div class="adv-sep">Form &amp; Dosierung</div><div class="adv-cap">Hier wählen, ob ein Stoff als Pulver oder Kapsel genutzt wird – die Listen unten richten sich danach.</div>
+        <div id="formGrid"></div>
+        <p class="adv-note">Pulver: Reinheit &lt;100 % erhöht Abwiegemenge und Kosten. Kapsel: mg/Stück bestimmt die Stückzahl.</p>
       </details>
-
-      <div class="agewarn" id="ageWarn"></div>
-    </div>
 
     <div class="summary">
       <div class="stat"><div class="v" id="totalGrams">205<span class="u"> g</span></div><div class="l">Batch gesamt</div></div>
@@ -365,7 +382,7 @@
     <div class="card">
       <div class="pricebasis"><span class="pb-l">Preisbasis</span><div class="seg" id="segPrice"><button type="button" data-v="hansen" class="on">Hansen</button><button type="button" data-v="bulk">Bulk-Richtwert</button><button type="button" data-v="live" id="liveBtn" disabled>Live</button></div><span class="livestatus" id="liveStatus"></span></div>
       <table class="grid">
-        <thead><tr><th>Batch-Stoff</th><th>Dosis</th><th>Menge</th><th>€/g</th><th>Kosten</th></tr></thead>
+        <thead><tr><th>Batch-Stoff</th><th>Dosis</th><th>Menge</th><th>Preis</th><th>Kosten</th></tr></thead>
         <tbody id="rows"></tbody>
         <tfoot><tr><td>Summe</td><td id="sumDose">20,5 g</td><td id="sumGrams">205 g</td><td></td><td class="cost" id="sumCost">18,20 €</td></tr></tfoot>
       </table>
@@ -390,11 +407,13 @@
         </select>
         <div class="cust" id="custFields" style="display:none">
           <input id="cNm" placeholder="Name">
-          <input id="cDose" class="num" type="number" step="0.1" min="0" placeholder="Dosis g">
-          <input id="cPrice" class="num" type="number" step="0.01" min="0" placeholder="€/g">
+          <select id="cForm" class="num"><option value="pulver">Pulver</option><option value="kapsel">Kapsel</option></select>
+          <input id="cDose" class="num" type="number" step="0.1" min="0" placeholder="Menge/Portion">
+          <input id="cPrice" class="num" type="number" step="0.01" min="0" placeholder="Preis/Einheit">
           <button id="cAdd" type="button">Hinzufügen</button>
         </div>
       </div>
+      <div id="sepWrap" style="display:none"><div class="adv-sub" style="margin:18px 0 6px">Nicht im Batch · separat dosieren</div><div id="sepList"></div></div>
       <div class="profnote" id="profNote"></div>
       <div class="savings" id="savings"></div>
       <div class="amp-legend"><span><i style="background:#16A34A"></i>fair</span><span><i style="background:#E0A100"></i>ok</span><span><i style="background:#DC2626"></i>teuer</span><span>· Hansen = Shop-Preis · Bulk = Richtwert (Stand Juni 2026)</span><span>· „vergleichen ↗“ öffnet die aktuelle Preissuche bei idealo</span></div>
@@ -408,13 +427,13 @@
     <div class="head"><span class="ix">02</span><h2>Separat dosieren</h2></div>
     <p class="sub">Kritisch oder hygroskopisch — gehört nie in den Batch, sondern frisch zur Portion.</p>
     <div class="card list">
-      <div class="r"><div class="n">Koffein (Tablette)</div><div class="d">vit4ever 200 mg/Tab · aus dem Gewicht berechnet</div><div class="v live" id="cafRow">219 mg</div></div>
-      <div class="r"><div class="n">Glycerol (GlycoPump)</div><div class="d">Hyperhydration — mit viel Wasser (Pulver abwiegen)</div><div class="v">1 Portion</div></div>
-      <div class="r" id="rowAgpc"><div class="n">Alpha-GPC (Pulver)</div><div class="d">Power-Form, erste Wahl fürs Training · abwiegen</div><div class="v" id="agpcVal">0,4 g</div></div>
-      <div class="r" id="rowCdp"><div class="n">CDP-Cholin / Citicolin (Kapsel)</div><div class="d">Alternative zu Alpha-GPC (eher Kognition)</div><div class="v" id="cdpVal">1 Kapsel · 250 mg</div></div>
-      <div class="r"><div class="n">L-Tyrosin (Kapsel)</div><div class="d">mentaler Fokus · Ziel ~1500 mg</div><div class="v" id="tyrVal">2 Kapseln</div></div>
-      <div class="r"><div class="n">Elektrolyte + Prise Salz</div><div class="d">1 Löffel Vit4ever (208 mg Na) + Salz</div><div class="v">~400 mg Na</div></div>
-      <div class="r" id="rowThe"><div class="n">L-Theanin (Kapsel, optional)</div><div class="d">glättet Koffein · Ziel ~200 mg</div><div class="v" id="theVal">1 Kapsel</div></div>
+      <div class="r"><div class="n">Koffein <span class="ev stark" title="Stärkster Wach-/Leistungsbooster; gut belegt für Fokus und Ausdauer.">stark</span></div><div class="d">aus Gewicht & Tablettengröße</div><div class="v live" id="cafRow">219 mg</div></div>
+      <div class="r"><div class="n">Glycerol (GlycoPump) <span class="ev mittel" title="Hyperhydration – Wasser in Muskel & Blut; unterstützt Pump.">mittel</span></div><div class="d">Hyperhydration</div><div class="v" id="glyVal">1 Portion</div></div>
+      <div class="r" id="rowAgpc"><div class="n">Alpha-GPC <span class="ev mittel" title="Cholinquelle mit Hinweisen auf mehr Output/Power; moderat belegt.">mittel</span></div><div class="d">Power-Form, erste Wahl fürs Training</div><div class="v" id="agpcVal">0,4 g</div></div>
+      <div class="r" id="rowCdp"><div class="n">CDP-Cholin / Citicolin <span class="ev schwach" title="Eher Kognition als Kraft; für Pre-Workout-Power schwächer belegt.">schwach</span></div><div class="d">Alternative zu Alpha-GPC (eher Kognition)</div><div class="v" id="cdpVal">1 Kapsel · 250 mg</div></div>
+      <div class="r"><div class="n">L-Tyrosin <span class="ev mittel" title="Kann Fokus unter Stress/Müdigkeit stützen; moderate Evidenz.">mittel</span></div><div class="d">mentaler Fokus · Ziel ~1500 mg</div><div class="v" id="tyrVal">2 Kapseln</div></div>
+      <div class="r"><div class="n">Elektrolyte + Prise Salz <span class="ev mittel" title="Wichtig bei Schweißverlust; Leistungseffekt kontextabhängig.">mittel</span></div><div class="d">~400 mg Na</div><div class="v" id="eleVal">1 Löffel</div></div>
+      <div class="r" id="rowThe"><div class="n">L-Theanin (optional) <span class="ev mittel" title="Glättet Koffein-Nervosität; Koffein+Theanin gut für Fokus belegt.">mittel</span></div><div class="d">glättet Koffein · Ziel ~200 mg</div><div class="v" id="theVal">1 Kapsel</div></div>
     </div>
     <p class="foot">Alpha-GPC und Glycerol zuletzt einrühren (ziehen schnell Wasser). Koffein, Tyrosin, Theanin und ggf. CDP-Cholin als Tablette/Kapsel zur Portion schlucken.</p>
   </section>
@@ -424,9 +443,9 @@
     <div class="head"><span class="ix">03</span><h2>Täglich · auch an Ruhetagen</h2></div>
     <p class="sub">Wirkt über die Sättigung der Speicher (~1–2 Wochen). An trainingsfreien Tagen als Mini-Portion separat nehmen.</p>
     <div class="card list">
-      <div class="r"><div class="n">Kreatin-Monohydrat</div><div class="v">5 g</div></div>
-      <div class="r"><div class="n">Beta-Alanin</div><div class="d">bei Kribbeln auf 2× 2 g splitten</div><div class="v">4 g</div></div>
-      <div class="r"><div class="n">Betain (TMG)</div><div class="v">2,5 g</div></div>
+      <div class="r"><div class="n">Kreatin-Monohydrat <span class="ev stark" title="Am besten belegtes Supplement für Kraft & Muskelaufbau.">stark</span></div><div class="v">5 g</div></div>
+      <div class="r"><div class="n">Beta-Alanin <span class="ev stark" title="Erhöht Muskel-Carnosin → Säurepuffer bei 1–4 min Belastung.">stark</span></div><div class="d">bei Kribbeln auf 2× 2 g splitten</div><div class="v">4 g</div></div>
+      <div class="r"><div class="n">Betain (TMG) <span class="ev mittel" title="Osmolyt + Methylgruppen-Donor; moderate Hinweise auf Power.">mittel</span></div><div class="v">2,5 g</div></div>
     </div>
     <div class="card tracker">
       <div class="trk-top"><label>Start der täglichen Einnahme <input type="date" id="trkStart"></label><span id="trkDays"></span></div>
@@ -513,7 +532,7 @@
 
 <div id="labelCard"></div>
 <script>
-  const WORKER_URL='https://pricing-service-mimimi809.danubedata.run'; // <- hier die Cloudflare-Worker-URL eintragen (siehe Anleitung)
+  const WORKER_URL='https://pricing-service-mimimi809.danubedata.run'; // <- DanubeData-Rapids-URL des Preis-Dienstes (siehe Anleitung)
   const PRESETS={
     citmal:{nm:'Citrullin-Malat',dose:8,bulk:0.03,good:0.04,ok:0.07,q:'Citrullin Malat Pulver',ev:'stark',why:'Citrullin als Malat-Variante – NO-Vorstufe für Pump, gut belegt.'},
     arginin:{nm:'L-Arginin',dose:3,bulk:0.03,good:0.04,ok:0.07,q:'L-Arginin Pulver',ev:'schwach',why:'Schlechte orale Bioverfügbarkeit – durch Citrullin überholt.'},
@@ -524,15 +543,15 @@
     hmb:{nm:'HMB',dose:3,bulk:0.08,good:0.08,ok:0.14,q:'HMB Pulver',ev:'mittel',why:'V.a. im Kaloriendefizit zum Muskelerhalt sinnvoll.'},
     cluster:{nm:'Cluster Dextrin',dose:30,bulk:0.02,good:0.03,ok:0.05,q:'Cluster Dextrin Pulver',ev:'mittel',why:'Schnelle Kohlenhydrate für lange/intensive Einheiten.'},
     agmatin:{nm:'Agmatinsulfat',dose:1,bulk:0.50,good:0.40,ok:0.70,q:'Agmatin Sulfat Pulver',ev:'schwach',why:'Wenig Humanevidenz; teuer.'},
-    glycerolp:{nm:'Glycerol-Pulver (HydroMax)',dose:2,bulk:0.10,good:0.10,ok:0.18,q:'HydroMax Glycerol Pulver',ev:'mittel',why:'Hyperhydration – Wasser in Muskel & Blut, unterstützt Pump.'},
+    glycerolp:{nm:'Glycerol-Pulver (HydroMax)',dose:2,bulk:0.10,good:0.10,ok:0.18,bx:false,q:'HydroMax Glycerol Pulver',ev:'mittel',why:'Hyperhydration – Wasser in Muskel & Blut, unterstützt Pump.'},
     eaa:{nm:'EAA',dose:10,bulk:0.05,good:0.05,ok:0.09,q:'EAA Pulver',ev:'mittel',why:'Nutzen v.a. bei niedriger Proteinzufuhr; sonst Geschmack/Füllstoff.'},
   };
   const ING=[
-    {nm:'L-Citrullin', key:'citrullin', dose:7,   hansen:0.12, bulk:0.04, good:0.05, ok:0.09, pur:100, on:true, q:'L-Citrullin Pulver', ev:'stark', why:'NO-Vorstufe → Pump & Durchblutung; gut belegt.'},
-    {nm:'Kreatin-Monohydrat', key:'kreatin', dose:5, hansen:null, bulk:0.02, good:0.03, ok:0.05, pur:100, on:true, q:'Kreatin Monohydrat Pulver', ev:'stark', why:'Am besten belegtes Supplement für Kraft & Muskelaufbau.'},
-    {nm:'Beta-Alanin', key:'betaalanin', dose:4,   hansen:null, bulk:0.03, good:0.04, ok:0.06, pur:100, on:true, q:'Beta-Alanin Pulver', ev:'stark', why:'Erhöht Muskel-Carnosin → Säurepuffer bei 1–4 min Belastung.'},
-    {nm:'Betain (TMG)',key:'betain', dose:2.5, hansen:0.10, bulk:0.04, good:0.06, ok:0.10, pur:100, on:true, q:'Betain Anhydrous TMG Pulver', ev:'mittel', why:'Osmolyt + Methylgruppen-Donor; moderate Hinweise auf Power.'},
-    {nm:'L-Taurin',    key:'taurin', dose:2,   hansen:0.08, bulk:0.025, good:0.04, ok:0.07, pur:100, on:true, q:'Taurin Pulver', ev:'mittel', why:'Zellvolumen/Antioxidans; kleine, gemischte Effekte.'},
+    {nm:'L-Citrullin', key:'citrullin', dose:7,   hansen:0.12, bulk:0.04, good:0.05, ok:0.09, pur:100, on:true, form:'pulver', q:'L-Citrullin Pulver', ev:'stark', why:'NO-Vorstufe → Pump & Durchblutung; gut belegt.'},
+    {nm:'Kreatin-Monohydrat', key:'kreatin', dose:5, hansen:null, bulk:0.02, good:0.03, ok:0.05, pur:100, on:true, form:'pulver', q:'Kreatin Monohydrat Pulver', ev:'stark', why:'Am besten belegtes Supplement für Kraft & Muskelaufbau.'},
+    {nm:'Beta-Alanin', key:'betaalanin', dose:4,   hansen:null, bulk:0.03, good:0.04, ok:0.06, pur:100, on:true, form:'pulver', q:'Beta-Alanin Pulver', ev:'stark', why:'Erhöht Muskel-Carnosin → Säurepuffer bei 1–4 min Belastung.'},
+    {nm:'Betain (TMG)',key:'betain', dose:2.5, hansen:0.10, bulk:0.04, good:0.06, ok:0.10, pur:100, on:true, form:'pulver', q:'Betain Anhydrous TMG Pulver', ev:'mittel', why:'Osmolyt + Methylgruppen-Donor; moderate Hinweise auf Power.'},
+    {nm:'L-Taurin',    key:'taurin', dose:2,   hansen:0.08, bulk:0.025, good:0.04, ok:0.07, pur:100, on:true, form:'pulver', q:'Taurin Pulver', ev:'mittel', why:'Zellvolumen/Antioxidans; kleine, gemischte Effekte.'},
   ];
   ING.forEach(x=>{x.price=(x.hansen!=null?x.hansen:x.bulk);});
 
@@ -544,43 +563,94 @@
   const $=id=>document.getElementById(id);
   const rows=$('rows'), pInput=$('portions');
 
-  function activeSum(){return ING.reduce((a,x)=>a+(x.on?x.dose:0),0);}
+  function activeSum(){return ING.reduce((a,x)=>a+((x.on&&x.form!=='kapsel'&&x.bx!==false)?x.dose:0),0);}
+
+  function renderSettings(){
+    const g=$('formGrid'); if(!g)return;
+    let h='<div class="adv-sub">Batch-Stoffe</div>';
+    ING.forEach((x,i)=>{
+      const cap=x.form==='kapsel';
+      h+='<div class="frow"><span class="fnm">'+x.nm+'</span>'
+        +'<span class="seg mini" data-bseg="'+i+'"><button type="button" data-v="pulver"'+(!cap?' class="on"':'')+'>Pulver</button><button type="button" data-v="kapsel"'+(cap?' class="on"':'')+'>Kapsel</button></span>'
+        +(cap?'<span class="fpar muted2">separat</span>':'<span class="fpar"><input class="adv-in" type="number" min="1" max="100" value="'+x.pur+'" data-pur="'+i+'"><em>% rein</em></span>')
+        +'</div>';
+    });
+    h+='<div class="adv-sub">Separat dosieren</div>';
+    SEPDEF.forEach(d=>{
+      const fm=sepForm[d.key], cap=(fm===d.alt);
+      h+='<div class="frow"><span class="fnm">'+d.nm+'</span>'
+        +'<span class="seg mini" data-sseg="'+d.key+'"><button type="button" data-v="pulver"'+(fm==='pulver'?' class="on"':'')+'>Pulver</button><button type="button" data-v="'+d.alt+'"'+(cap?' class="on"':'')+'>'+d.altLabel+'</button></span>';
+      if(cap) h+='<span class="fpar"><input class="adv-in" type="number" min="1" value="'+mgv[d.mg]+'" data-mg="'+d.mg+'"><em>mg/St</em></span>';
+      else if(d.pur) h+='<span class="fpar"><input class="adv-in" type="number" min="1" max="100" value="'+purAgpcV+'" data-purx="agpc"><em>% rein</em></span>';
+      else h+='<span class="fpar muted2">Zieldosis</span>';
+      h+='</div>';
+    });
+    g.innerHTML=h;
+  }
+
+  function renderSepList(){
+    const w=$('sepWrap'), l=$('sepList'); if(!l)return;
+    const items=[]; ING.forEach((x,i)=>{ if(x.form==='kapsel'||x.bx===false) items.push([x,i]); });
+    if(!items.length){ w.style.display='none'; l.innerHTML=''; return; }
+    w.style.display='block';
+    l.innerHTML=items.map(([x,i])=>{
+      const cap=x.form==='kapsel';
+      const ev=x.ev?' <span class="ev '+x.ev+'" title="'+(x.why||'').replace(/"/g,'&quot;')+'">'+x.ev+'</span>':'';
+      const rm=x.custom?'<button class="rm" data-rm="'+i+'" title="entfernen">×</button>':'';
+      const toB=(cap&&x.bx!==false)?'<button class="tobatch" data-tobatch="'+i+'">→ in den Batch</button>':'';
+      return '<div class="sepitem'+(x.on?'':' off')+'">'
+        +'<label class="inc"><input type="checkbox" data-on="'+i+'"'+(x.on?' checked':'')+'><span>'+x.nm+ev+' '+rm+'</span></label>'
+        +'<span class="si-amt" data-g="'+i+'"></span>'
+        +'<span class="pricecell"><span class="amp" data-amp="'+i+'"></span><input class="price-in" type="number" step="0.01" min="0" value="'+x.price.toFixed(2)+'" data-p="'+i+'"><span class="punit">'+(cap?'€/St':'€/g')+'</span></span>'
+        +'<span class="cost" data-c="'+i+'"></span>'+toB+'</div>';
+    }).join('');
+  }
 
   function renderRows(){
     const as=activeSum();
     rows.innerHTML='';
     ING.forEach((x,i)=>{
-      const pct=(x.on&&as>0)?Math.round(x.dose/as*100):0;
+      if(x.form==='kapsel'||x.bx===false)return;
+      const cap=(x.form==='kapsel'), sep=(cap||x.bx===false);
+      const pct=(x.on&&!sep&&as>0)?Math.round(x.dose/as*100):0;
       const htxt=(x.hansen!=null?'Hansen '+egg(x.hansen):'Hansen n/a');
-      const rm=x.custom?'<button class="rm" data-rm="'+i+'" title="entfernen">\u00d7</button>':'';
+      const refs=htxt+' · Bulk ~'+egg(x.bulk)+(x.live!=null?' · Live ~'+egg(x.live)+(x.liveShop?' ('+x.liveShop+')':''):'');
+      const rm=x.custom?'<button class="rm" data-rm="'+i+'" title="entfernen">×</button>':'';
+      const ev=x.ev?' <span class="ev '+x.ev+'" title="'+(x.why||'').replace(/"/g,'&quot;')+'">'+x.ev+'</span>':'';
+      const tagSep=sep?'<span class="septag">separat</span> ':'';
+      const cmp='<a class="cmp" href="'+cmpUrl(x.q)+'" target="_blank" rel="noopener">vergleichen ↗</a>';
+      let src;
+      if(cap){ src=tagSep+'Kapsel · pro Portion · '+cmp; }
+      else if(x.bx===false){ src=tagSep+'Pulver · hygroskopisch, nicht in den Batch · '+refs+' · '+cmp; }
+      else { src=(x.on?pct+'% Batch · ':'')+refs+' · '+cmp; }
       const tr=document.createElement('tr');
       if(!x.on)tr.className='off';
       tr.innerHTML=
-        '<td><label class="inc"><input type="checkbox" data-on="'+i+'"'+(x.on?' checked':'')+'><span>'+x.nm+rm+(x.ev?' <span class="ev '+x.ev+'" title="'+(x.why||'').replace(/"/g,'&quot;')+'">'+x.ev+'</span>':'')+'</span></label>'+
-          '<span class="src">'+(x.on?pct+'% Batch \u00b7 ':'')+htxt+' \u00b7 Bulk ~'+egg(x.bulk)+(x.live!=null?' \u00b7 Live ~'+egg(x.live)+(x.liveShop?' ('+x.liveShop+')':''):'')+' \u00b7 <a class="cmp" href="'+cmpUrl(x.q)+'" target="_blank" rel="noopener">vergleichen \u2197</a></span></td>'+
-        '<td><input class="dose-in" type="number" step="0.1" min="0" value="'+x.dose+'" data-dose="'+i+'"></td>'+
+        '<td><label class="inc"><input type="checkbox" data-on="'+i+'"'+(x.on?' checked':'')+'><span>'+x.nm+rm+ev+'</span></label>'+
+          '<span class="src">'+src+'</span></td>'+
+        '<td><input class="dose-in" type="number" step="'+(cap?'1':'0.1')+'" min="0" value="'+x.dose+'" data-dose="'+i+'"><span class="punit">'+(cap?'Kps':'g')+'</span></td>'+
         '<td data-g="'+i+'"></td>'+
-        '<td><div class="pricecell"><span class="amp" data-amp="'+i+'"></span><input class="price-in" type="number" step="0.01" min="0" value="'+x.price.toFixed(2)+'" data-p="'+i+'"></div></td>'+
+        '<td><div class="pricecell"><span class="amp" data-amp="'+i+'"></span><input class="price-in" type="number" step="0.01" min="0" value="'+x.price.toFixed(2)+'" data-p="'+i+'"><span class="punit">'+(cap?'€/St':'€/g')+'</span></div></td>'+
         '<td class="cost" data-c="'+i+'"></td>';
       rows.appendChild(tr);
     });
-    renderPur();
+    renderSepList();
+    renderSettings();
     calc();
   }
 
-  function renderPur(){
-    const g=$('purGrid'); if(!g)return; g.innerHTML='';
-    const c1=document.createElement('div'); c1.className='adv-col';
-    const c2=document.createElement('div'); c2.className='adv-col';
-    ING.forEach((x,i)=>{
-      const r=document.createElement('div'); r.className='adv-row';
-      r.innerHTML='<span>'+x.nm+'</span><span class="adv-unit"><input class="adv-in" type="number" min="1" max="100" value="'+x.pur+'" data-pur="'+i+'"><em>%</em></span>';
-      (i%2===0?c1:c2).appendChild(r);
-    });
-    g.appendChild(c1); g.appendChild(c2);
-  }
-
-  let cafK=3, cholSrc='agpc', theanin=true, plI=0;
+  let cafK=3, cholSrc='agpc', theanin=true, plI=0, sepForm={caf:'tablette',agpc:'pulver',tyr:'kapsel',the:'kapsel',cdp:'kapsel',gly:'pulver',ele:'pulver'};
+  const SEPDEF=[
+    {key:'caf',nm:'Koffein',alt:'tablette',altLabel:'Tablette',mg:'Caf'},
+    {key:'agpc',nm:'Alpha-GPC',alt:'kapsel',altLabel:'Kapsel',mg:'Agpc',pur:true},
+    {key:'tyr',nm:'L-Tyrosin',alt:'kapsel',altLabel:'Kapsel',mg:'Tyr'},
+    {key:'the',nm:'L-Theanin',alt:'kapsel',altLabel:'Kapsel',mg:'The'},
+    {key:'cdp',nm:'CDP-Cholin',alt:'kapsel',altLabel:'Kapsel',mg:'Cdp'},
+    {key:'gly',nm:'Glycerol',alt:'kapsel',altLabel:'Kapsel',mg:'Gly'},
+    {key:'ele',nm:'Elektrolyte',alt:'kapsel',altLabel:'Kapsel',mg:'Ele'},
+  ];
+  const mgv={Caf:200,Tyr:650,The:375,Cdp:250,Agpc:300,Gly:1000,Ele:250};
+  let purAgpcV=99;
   function applyChol(){ $('rowAgpc').classList.toggle('muted',cholSrc!=='agpc'); $('rowCdp').classList.toggle('muted',cholSrc!=='cdp'); }
   function applyThe(){ $('rowThe').classList.toggle('muted',!theanin); }
   function seg(id,cb){const g=$(id);g.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;[...g.children].forEach(c=>c.classList.remove('on'));b.classList.add('on');cb(b.dataset.v);});}
@@ -605,25 +675,32 @@
     let P=parseInt(pInput.value)||0; if(P<1)P=1;
     const W=parseInt($('weight').value), A=parseInt($('age').value);
     $('wVal').textContent=W; $('aVal').textContent=A; $('pVal').textContent=P;
-    const purAgpc=Math.min(100,Math.max(1,parseFloat($('purAgpc').value)||99));
-    const mgCaf=parseFloat($('mgCaf').value)||200, mgTyr=parseFloat($('mgTyr').value)||650, mgThe=parseFloat($('mgThe').value)||375, mgCdp=parseFloat($('mgCdp').value)||250;
     const target=Math.round(W*cafK/5)*5;
-    const tabs=Math.max(1,Math.round(target/mgCaf));
+    const tabs=Math.max(1,Math.round(target/mgv.Caf));
     $('cafVal').textContent=target; $('cafTab').textContent=tabs; $('cafKk').textContent=cafK.toLocaleString('de-DE');
-    $('cafRow').textContent=target+' mg \u00b7 '+tabs+(tabs===1?' Tablette':' Tabletten');
-    const aw=0.4*100/purAgpc; $('agpcVal').textContent=gram(aw);
-    const tyrC=Math.max(1,Math.round(1500/mgTyr)); $('tyrVal').textContent=tyrC+(tyrC===1?' Kapsel':' Kapseln');
-    const theC=Math.max(1,Math.round(200/mgThe)); $('theVal').textContent=theC+(theC===1?' Kapsel':' Kapseln');
-    const cdpC=Math.max(1,Math.round(250/mgCdp)); $('cdpVal').textContent=cdpC+(cdpC===1?' Kapsel':' Kapseln')+' \u00b7 '+(cdpC*mgCdp)+' mg';
+    $('cafRow').textContent=(sepForm.caf==='pulver')?(target+' mg abwiegen'):(target+' mg · '+tabs+(tabs===1?' Tablette':' Tabletten'));
+    $('agpcVal').textContent=(sepForm.agpc==='kapsel')?((c=>c+(c===1?' Kapsel':' Kapseln'))(Math.max(1,Math.round(400/mgv.Agpc)))):gram(0.4*100/purAgpcV);
+    $('tyrVal').textContent=(sepForm.tyr==='pulver')?'1,5 g':((c=>c+(c===1?' Kapsel':' Kapseln'))(Math.max(1,Math.round(1500/mgv.Tyr))));
+    $('theVal').textContent=(sepForm.the==='pulver')?'0,2 g':((c=>c+(c===1?' Kapsel':' Kapseln'))(Math.max(1,Math.round(200/mgv.The))));
+    $('cdpVal').textContent=(sepForm.cdp==='pulver')?'0,25 g':((c=>c+(c===1?' Kapsel':' Kapseln')+' · '+(c*mgv.Cdp)+' mg')(Math.max(1,Math.round(250/mgv.Cdp))));
+    $('glyVal').textContent=(sepForm.gly==='kapsel')?((c=>c+(c===1?' Kapsel':' Kapseln'))(Math.max(1,Math.round(2000/mgv.Gly)))):'1 Portion';
+    $('eleVal').textContent=(sepForm.ele==='kapsel')?((c=>c+(c===1?' Kapsel':' Kapseln'))(Math.max(1,Math.round(400/mgv.Ele)))):'1 Löffel';
     ageNote(A);
     let tg=0,tc=0,bulkTc=0;
     ING.forEach((x,i)=>{
       const gEl=document.querySelector('[data-g="'+i+'"]'), cEl=document.querySelector('[data-c="'+i+'"]'), aEl=document.querySelector('[data-amp="'+i+'"]');
-      if(!x.on){ if(gEl)gEl.textContent='\u2014'; if(cEl)cEl.textContent='\u2014'; if(aEl)aEl.className='amp'; return; }
-      const g=x.dose*P*100/x.pur, c=g*x.price; tg+=g; tc+=c; bulkTc+=x.dose*P*100/x.pur*x.bulk;
-      if(gEl)gEl.textContent=gram(g);
-      if(cEl)cEl.textContent=eur(c);
-      if(aEl){ aEl.className='amp'+(x.good==null?'':(' '+(x.price<=x.good?'g':(x.price<=x.ok?'a':'r')))); }
+      if(!x.on){ if(gEl)gEl.textContent='—'; if(cEl)cEl.textContent='—'; if(aEl)aEl.className='amp'; return; }
+      if(x.form==='kapsel'){
+        const caps=x.dose*P, c=caps*x.price; tc+=c; bulkTc+=c;
+        if(gEl)gEl.textContent=Math.round(caps).toLocaleString('de-DE')+' Kps';
+        if(cEl)cEl.textContent=eur(c);
+        if(aEl)aEl.className='amp';
+      } else {
+        const g=x.dose*P*100/x.pur, c=g*x.price; if(x.bx!==false)tg+=g; tc+=c; bulkTc+=x.dose*P*100/x.pur*x.bulk;
+        if(gEl)gEl.textContent=gram(g);
+        if(cEl)cEl.textContent=eur(c);
+        if(aEl){ aEl.className='amp'+(x.good==null?'':(' '+(x.price<=x.good?'g':(x.price<=x.ok?'a':'r')))); }
+      }
     });
     $('sumDose').textContent=gram(activeSum());
     $('totalGrams').innerHTML=Math.round(tg).toLocaleString('de-DE')+'<span class="u"> g</span>';
@@ -649,28 +726,42 @@
     if(t.dataset.p!==undefined){ING[+t.dataset.p].price=parseFloat(t.value)||0;calc();}
     else if(t.dataset.dose!==undefined){ING[+t.dataset.dose].dose=parseFloat(t.value)||0;calc();}
     else if(t.dataset.pur!==undefined){ING[+t.dataset.pur].pur=Math.min(100,Math.max(1,parseFloat(t.value)||100));calc();}
+    else if(t.dataset.mg!==undefined){mgv[t.dataset.mg]=parseFloat(t.value)||mgv[t.dataset.mg];calc();}
+    else if(t.dataset.purx!==undefined){purAgpcV=Math.min(100,Math.max(1,parseFloat(t.value)||99));calc();}
     else if(t.classList&&t.classList.contains('adv-in')){calc();}
   });
-  document.addEventListener('change',e=>{ if(e.target.dataset.on!==undefined){ING[+e.target.dataset.on].on=e.target.checked;renderRows();} });
-  document.addEventListener('click',e=>{ if(e.target.dataset.rm!==undefined){ING.splice(+e.target.dataset.rm,1);renderRows();} });
+  document.addEventListener('change',e=>{
+    if(e.target.dataset.on!==undefined){ING[+e.target.dataset.on].on=e.target.checked;renderRows();}
+    else if(e.target.dataset.form!==undefined){ING[+e.target.dataset.form].form=e.target.value;renderRows();}
+    else if(e.target.dataset.sep!==undefined){sepForm[e.target.dataset.sep]=e.target.value;calc();}
+  });
+  document.addEventListener('click',e=>{
+    const mini=e.target.closest('.seg.mini button');
+    if(mini){ const g=mini.parentElement; [...g.children].forEach(c=>c.classList.remove('on')); mini.classList.add('on');
+      if(g.dataset.bseg!==undefined){ING[+g.dataset.bseg].form=mini.dataset.v;renderRows();}
+      else if(g.dataset.sseg!==undefined){sepForm[g.dataset.sseg]=mini.dataset.v;renderSettings();calc();}
+      return; }
+    if(e.target.dataset.tobatch!==undefined){ING[+e.target.dataset.tobatch].form='pulver';renderRows();return;}
+    if(e.target.dataset.rm!==undefined){ING.splice(+e.target.dataset.rm,1);renderRows();}
+  });
 
   $('addSel').addEventListener('change',e=>{
     const v=e.target.value;
     if(v==='__custom'){$('custFields').style.display='flex';}
-    else if(v&&PRESETS[v]){const p=PRESETS[v];ING.push({nm:p.nm,dose:p.dose,hansen:null,bulk:p.bulk,price:p.bulk,good:p.good,ok:p.ok,pur:100,on:true,custom:true,q:p.q});e.target.value='';$('custFields').style.display='none';renderRows();}
+    else if(v&&PRESETS[v]){const p=PRESETS[v];ING.push({nm:p.nm,dose:p.dose,form:'pulver',bx:p.bx,hansen:null,bulk:p.bulk,price:p.bulk,good:p.good,ok:p.ok,pur:100,on:true,custom:true,q:p.q,ev:p.ev,why:p.why});e.target.value='';$('custFields').style.display='none';renderRows();}
   });
   $('cAdd').addEventListener('click',()=>{
-    const nm=$('cNm').value.trim(), d=parseFloat($('cDose').value)||0, pr=parseFloat($('cPrice').value)||0;
+    const nm=$('cNm').value.trim(), fm=$('cForm').value, d=parseFloat($('cDose').value)||0, pr=parseFloat($('cPrice').value)||0;
     if(!nm||d<=0)return;
-    ING.push({nm:nm,dose:d,hansen:null,bulk:pr,price:pr,good:null,ok:null,pur:100,on:true,custom:true,q:nm+' Pulver'});
-    $('cNm').value='';$('cDose').value='';$('cPrice').value='';$('custFields').style.display='none';$('addSel').value='';renderRows();
+    ING.push({nm:nm,dose:d,form:fm,hansen:null,bulk:(fm==='kapsel'?null:pr),price:pr,good:null,ok:null,pur:100,on:true,custom:true,q:nm+(fm==='kapsel'?' Kapseln':' Pulver')});
+    $('cNm').value='';$('cDose').value='';$('cPrice').value='';$('cForm').value='pulver';$('custFields').style.display='none';$('addSel').value='';renderRows();
   });
 
   renderRows();
 
   async function fetchLive(){
     const st=$('liveStatus');
-    if(!WORKER_URL){ st.textContent='Live: kein Worker konfiguriert'; return; }
+    if(!WORKER_URL){ st.textContent='Live: kein Preis-Dienst konfiguriert'; return; }
     st.textContent='Live-Preise werden geladen \u2026';
     try{
       const r=await fetch(WORKER_URL,{cache:'no-store'}); if(!r.ok) throw 0;
@@ -718,7 +809,7 @@
   function applyTemplate(t){
     const T=TEMPLATES[t]; if(!T)return;
     ING.forEach(x=>{ if(x.key && T.base[x.key]!=null){ const d=T.base[x.key]; x.on=d>0; if(d>0)x.dose=d; } });
-    (T.add||[]).forEach(k=>{ if(!ING.some(x=>x.tplkey===k)){ const p=PRESETS[k]; ING.push({nm:p.nm,dose:p.dose,hansen:null,bulk:p.bulk,price:p.bulk,good:p.good,ok:p.ok,pur:100,on:true,custom:true,tplkey:k,ev:p.ev,why:p.why,q:p.q}); } });
+    (T.add||[]).forEach(k=>{ if(!ING.some(x=>x.tplkey===k)){ const p=PRESETS[k]; ING.push({nm:p.nm,dose:p.dose,form:'pulver',hansen:null,bulk:p.bulk,price:p.bulk,good:p.good,ok:p.ok,pur:100,on:true,custom:true,tplkey:k,ev:p.ev,why:p.why,q:p.q}); } });
     renderRows();
   }
   $('tplSel').addEventListener('change',e=>{ if(e.target.value){ applyTemplate(e.target.value); e.target.value=''; } });
@@ -740,9 +831,12 @@
   // --- Misch-Player ---
   function plSteps(){
     const P=parseInt(pInput.value)||1;
-    const arr=ING.filter(x=>x.on).map(x=>({h:'Abwiegen',t:'<b>'+gram(x.dose*P*100/x.pur)+'</b> '+x.nm+' abwiegen und einf\u00fcllen'}));
-    arr.push({h:'Mischen',t:'Alles 1\u20132\u202fMinuten gr\u00fcndlich vermengen, bis die Mischung homogen ist.'});
-    arr.push({h:'Portionieren',t:'In <b>'+P+' Portionen \u00e0 '+gram(activeSum())+'</b> abf\u00fcllen. Luftdicht lagern, Trockenmittel dazu.'});
+    const pw=ING.filter(x=>x.on&&x.form!=='kapsel'&&x.bx!==false);
+    const sp=ING.filter(x=>x.on&&(x.form==='kapsel'||x.bx===false));
+    const arr=pw.map(x=>({h:'Abwiegen',t:'<b>'+gram(x.dose*P*100/x.pur)+'</b> '+x.nm+' abwiegen und einfüllen'}));
+    arr.push({h:'Mischen',t:'Alles 1–2 Minuten gründlich vermengen, bis die Mischung homogen ist.'});
+    arr.push({h:'Portionieren',t:'In <b>'+P+' Portionen à '+gram(activeSum())+'</b> abfüllen. Luftdicht lagern, Trockenmittel dazu.'});
+    if(sp.length)arr.push({h:'Separat',t:'Nicht mischen – pro Portion separat: '+sp.map(x=>x.form==='kapsel'?(x.dose+'× '+x.nm):(gram(x.dose*100/x.pur)+' '+x.nm)).join(', ')+'.'});
     return arr;
   }
   function renderPlayer(){
@@ -758,8 +852,8 @@
   // --- Druck-Etikett ---
   function printLabel(){
     const P=parseInt(pInput.value)||1;
-    const rws=ING.filter(x=>x.on).map(x=>'<tr><td>'+x.nm+'</td><td>'+gram(x.dose*P*100/x.pur)+'</td></tr>').join('');
-    $('labelCard').innerHTML='<h2>Pre-Workout Batch</h2><div class="lc-meta">Portion: '+gram(activeSum())+' \u00b7 '+P+' Portionen \u00b7 '+new Date().toLocaleDateString('de-DE')+'</div><table>'+rws+'</table><div class="lc-foot">~45\u202fmin vor dem Training: 1 Portion in ~0,7\u202fl Wasser. K\u00fchl & trocken lagern.</div>';
+    const rws=ING.filter(x=>x.on).map(x=>{const amt=x.form==='kapsel'?(Math.round(x.dose*P)+' Kps'):gram(x.dose*P*100/x.pur);const st=(x.form==='kapsel'||x.bx===false)?' *':'';return '<tr><td>'+x.nm+st+'</td><td>'+amt+'</td></tr>';}).join('');
+    $('labelCard').innerHTML='<h2>Pre-Workout Batch</h2><div class="lc-meta">Pulver-Batch-Portion: '+gram(activeSum())+' · '+P+' Portionen · '+new Date().toLocaleDateString('de-DE')+'</div><table>'+rws+'</table><div class="lc-foot">~45 min vor dem Training: 1 Portion in ~0,7 l Wasser. * = separat (Kapseln/hygroskopisch), nicht in den Batch mischen. Kühl & trocken lagern.</div>';
     document.body.classList.add('printlabel'); window.print();
   }
   $('printBtn').onclick=printLabel;
