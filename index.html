@@ -280,7 +280,9 @@
     #labelCard td:last-child{text-align:right;font-family:var(--mono);font-weight:700}
     #labelCard .lc-foot{margin-top:14px;font-size:11px;color:#555}
   }
-  .topbar{display:flex;justify-content:flex-end;margin-bottom:20px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}
+  .navlink{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:7px;border:1px solid var(--hair);padding:7px 12px;border-radius:999px;background:var(--surface)}
+  .navlink:hover{border-color:var(--acc);color:var(--acc-ink)}
   .seg.theme{display:inline-flex;width:auto;flex:none}
   .seg.theme button{flex:none;padding:7px 13px;font-size:12px}
   .optbox.standalone{margin-top:14px;border-top:none;background:var(--surface);border-radius:18px;box-shadow:var(--shadow-sm);padding:4px 22px 18px}
@@ -353,7 +355,7 @@
 <div class="wrap">
 
   <header>
-    <div class="topbar"><div class="seg theme" id="segTheme"><button type="button" data-v="light">Hell</button><button type="button" data-v="dark">Dunkel</button><button type="button" data-v="auto" class="on">Auto</button></div></div>
+    <div class="topbar"><a class="navlink" href="vitalstoffe.html">Vitalstoffe →</a><div class="seg theme" id="segTheme"><button type="button" data-v="light">Hell</button><button type="button" data-v="dark">Dunkel</button><button type="button" data-v="auto" class="on">Auto</button></div></div>
     <span class="tag-top"><span class="d"></span>Dosier-Protokoll · Bodybuilding</span>
     <h1>Pre-Workout <span class="g">Stack</span></h1>
     <p class="lede">Eigenmischung mit klaren Wirkdosen — vormischbarer Batch, separat dosierte Stoffe und tägliche Sättigungs-Stoffe. Personalisierbar nach Gewicht, Alter und Portionszahl, mit Kostenrechner – Hansen, Bulk-Richtwert oder Live-Preise.</p>
