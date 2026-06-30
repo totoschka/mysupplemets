@@ -323,6 +323,59 @@
   .stx.bald{background:#FBF1D8;color:#9A6B06}
   .stx.nach{background:#FBE6E1;color:#B23218}
   .dim{color:var(--faint);font-weight:400}
+  .hamb{position:fixed;top:16px;right:16px;z-index:60;width:44px;height:44px;border:1px solid var(--hair);background:var(--surface);border-radius:12px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;cursor:pointer}
+  .hamb span{display:block;width:18px;height:2px;background:var(--ink);border-radius:2px;transition:.22s}
+  .hamb:hover{border-color:var(--acc)}
+  .hamb.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  .hamb.open span:nth-child(2){opacity:0}
+  .hamb.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+  .scrim{position:fixed;inset:0;background:rgba(8,10,16,.46);opacity:0;visibility:hidden;transition:.25s;z-index:70}
+  .scrim.open{opacity:1;visibility:visible}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:min(440px,92vw);background:var(--bg);box-shadow:-22px 0 55px -22px rgba(0,0,0,.5);transform:translateX(101%);transition:transform .28s cubic-bezier(.4,0,.2,1);z-index:80;display:flex;flex-direction:column;border-left:1px solid var(--hair)}
+  .drawer.open{transform:none}
+  .drawer-head{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--hair);flex:none}
+  .drawer-title{font-family:var(--disp);font-weight:700;font-size:21px;letter-spacing:-.01em}
+  .drawer-close{width:36px;height:36px;border:1px solid var(--hair);background:var(--surface);border-radius:10px;font-size:20px;color:var(--muted);cursor:pointer;line-height:1}
+  .drawer-close:hover{border-color:var(--acc);color:var(--acc-ink)}
+  .drawer-body{padding:18px 22px 48px;overflow-y:auto}
+  .drawer-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+  .dr-l{font-size:13px;color:var(--muted)}
+  .navlink.full{display:flex;justify-content:center;margin-bottom:20px;padding:10px}
+  .opensettings{width:100%;margin-top:14px;border:1px solid var(--hair);background:var(--hair-2);color:var(--ink);border-radius:12px;padding:12px;font-size:13px;font-weight:600;font-family:var(--body);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+  .opensettings:hover{border-color:var(--acc);background:var(--acc-soft);color:var(--acc-ink)}
+  .batchbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px}
+  .bb-sel{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+  .bb-l{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+  #batchSel{flex:1;min-width:0;border:1px solid var(--hair);border-radius:10px;padding:9px 11px;font-size:15px;font-weight:600;font-family:var(--disp);background:var(--surface);color:var(--ink)}
+  .bb-edit{border:1px solid var(--acc);background:var(--acc-soft);color:var(--acc-ink);border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+  .bb-edit:hover{background:var(--acc);color:#fff}
+  .stackcard{margin-top:14px}
+  .stackgrp+.stackgrp{margin-top:22px;padding-top:18px;border-top:1px solid var(--hair)}
+  .stgrp-h{font-family:var(--disp);font-weight:600;font-size:17px;margin-bottom:8px}
+  .sl-grp{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:600;margin:10px 0 6px;display:flex;justify-content:space-between;align-items:baseline}
+  .sl-sum{color:var(--acc-ink);text-transform:none;letter-spacing:0}
+  .sl{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:9px 0;border-top:1px solid var(--hair-2)}
+  .sl-n{font-size:15px}
+  .sl-a{font-family:var(--mono);font-size:13px;color:var(--muted);white-space:nowrap}
+  .sl-empty{color:var(--faint);font-size:13px;padding:6px 0}
+  .infobar{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .infobar button{border:1px solid var(--hair);background:var(--surface);color:var(--muted);border-radius:999px;padding:8px 14px;font-size:12.5px;font-family:var(--body);cursor:pointer}
+  .infobar button:hover{border-color:var(--acc);color:var(--acc-ink)}
+  .modal{position:fixed;inset:0;z-index:90;display:none;overflow-y:auto}
+  .modal.open{display:block}
+  .modal-bg{position:fixed;inset:0;background:rgba(8,10,16,.5)}
+  .modal-card{position:relative;background:var(--bg);border-radius:20px;max-width:780px;width:calc(100% - 32px);margin:40px auto;box-shadow:var(--shadow);border:1px solid var(--hair)}
+  .modal-head{display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:1px solid var(--hair);position:sticky;top:0;background:var(--bg);border-radius:20px 20px 0 0;z-index:3}
+  .modal-title{font-family:var(--disp);font-weight:700;font-size:20px}
+  .modal-body{padding:18px 22px 28px}
+  .modal-body .card{margin-top:14px}
+  .batchmeta{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between}
+  .fld{display:flex;flex-direction:column;gap:6px;flex:1;min-width:180px}
+  .fld span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+  .fld input{border:1px solid var(--hair);border-radius:10px;padding:10px 12px;font-size:16px;font-family:var(--disp);font-weight:600;background:var(--surface);color:var(--ink)}
+  .batchacts{display:flex;gap:8px;flex-wrap:wrap}
+  .batchacts button{border:1px solid var(--hair);background:var(--surface);color:var(--muted);border-radius:9px;padding:8px 12px;font-size:12px;cursor:pointer}
+  .batchacts button:hover{border-color:var(--acc);color:var(--acc-ink)}
   @media(max-width:600px){
     .ctrls{grid-template-columns:1fr;gap:22px}
     .opts{grid-template-columns:1fr}
@@ -355,35 +408,18 @@
 <div class="wrap">
 
   <header>
-    <div class="topbar"><a class="navlink" href="vitalstoffe.html">Vitalstoffe →</a><div class="seg theme" id="segTheme"><button type="button" data-v="light">Hell</button><button type="button" data-v="dark">Dunkel</button><button type="button" data-v="auto" class="on">Auto</button></div></div>
     <span class="tag-top"><span class="d"></span>Dosier-Protokoll · Bodybuilding</span>
     <h1>Pre-Workout <span class="g">Stack</span></h1>
-    <p class="lede">Eigenmischung mit klaren Wirkdosen — vormischbarer Batch, separat dosierte Stoffe und tägliche Sättigungs-Stoffe. Personalisierbar nach Gewicht, Alter und Portionszahl, mit Kostenrechner – Hansen, Bulk-Richtwert oder Live-Preise.</p>
+    <p class="lede">Eigenmischung mit klaren Wirkdosen: vormischbarer Batch plus separat dosierte und tägliche Stoffe — personalisierbar, mit Kostenrechner.</p>
   </header>
 
-  <!-- 01 -->
-  <section class="reveal">
-    <div class="head"><span class="ix">01</span><h2>Personalisieren &amp; Batch</h2></div>
-    <p class="sub">Gewicht steuert die Koffeindosis, Alter die Sicherheitshinweise. Die Gramm-Mengen der übrigen Stoffe sind feste Wirkdosen. Portionen entsprechen den „Servings".</p>
-
-    <div class="card">
-      <div class="ctrls">
-        <div><div class="cl"><span class="lbl">Körpergewicht</span><span class="cv"><span id="wVal">73</span> kg</span></div><input type="range" id="weight" min="50" max="130" step="1" value="73"></div>
-        <div><div class="cl"><span class="lbl">Alter</span><span class="cv"><span id="aVal">30</span> J</span></div><input type="range" id="age" min="16" max="80" step="1" value="30"></div>
-        <div><div class="cl"><span class="lbl">Portionen</span><span class="cv"><span id="pVal">10</span>×</span></div>
-          <div class="stepper"><button type="button" id="minus">–</button><input id="portions" type="number" min="1" max="200" value="10"><button type="button" id="plus">+</button></div>
-        </div>
-        <div><div class="cl"><span class="lbl">Koffein-Dosis</span></div><div class="caf"><span class="big"><span id="cafVal">219</span> mg</span><span class="sm"><span id="cafTab">1</span> Tab · <span id="cafKk">3</span> mg/kg</span></div></div>
-      </div>
-
-      <div class="budget"><label>Koffein sonst heute <input id="otherCaf" type="number" min="0" value="0"> mg</label><span id="budgetLine"></span></div>
-
-
-      <div class="agewarn" id="ageWarn"></div>
-    </div>
-
-    <details class="optbox standalone">
-      <summary>Einstellungen · gelten für das ganze Protokoll<span class="chev">▾</span></summary>
+  <button class="hamb" id="hambBtn" aria-label="Menü"><span></span><span></span><span></span></button>
+  <div class="scrim" id="scrim"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-head"><span class="drawer-title">Einstellungen</span><button class="drawer-close" id="drawerClose" aria-label="Schließen">×</button></div>
+    <div class="drawer-body">
+      <div class="drawer-row"><span class="dr-l">Darstellung</span><div class="seg theme" id="segTheme"><button type="button" data-v="light">Hell</button><button type="button" data-v="dark">Dunkel</button><button type="button" data-v="auto" class="on">Auto</button></div></div>
+      <a class="navlink full" href="vitalstoffe.html">Vitalstoffe →</a>
         <div class="adv-sep first">Ziel &amp; Tag-Typ</div><div class="adv-cap">Beeinflusst die Empfehlung unter dem Baukasten.</div>
         <div class="opts">
           <div><div class="opt-l">Ziel</div><div class="seg" id="segGoal"><button type="button" data-v="erhalt" class="on">Erhalt</button><button type="button" data-v="cut">Cut</button><button type="button" data-v="aufbau">Aufbau</button></div></div>
@@ -426,7 +462,36 @@
         </div>
       </div>
 
-      </details>
+    </div>
+  </aside>
+
+  <!-- 01 -->
+  <section class="reveal">
+    <div class="head"><span class="ix">01</span><h2>Dein Stack</h2></div>
+    <p class="sub">Was du pro Portion nimmst – Trainingstag und Nicht-Trainingstag. Zusammenstellen, benennen und wechseln im Batch-Fenster.</p>
+
+    <div class="card">
+      <div class="ctrls">
+        <div><div class="cl"><span class="lbl">Körpergewicht</span><span class="cv"><span id="wVal">73</span> kg</span></div><input type="range" id="weight" min="50" max="130" step="1" value="73"></div>
+        <div><div class="cl"><span class="lbl">Alter</span><span class="cv"><span id="aVal">30</span> J</span></div><input type="range" id="age" min="16" max="80" step="1" value="30"></div>
+        <div><div class="cl"><span class="lbl">Portionen</span><span class="cv"><span id="pVal">10</span>×</span></div>
+          <div class="stepper"><button type="button" id="minus">–</button><input id="portions" type="number" min="1" max="200" value="10"><button type="button" id="plus">+</button></div>
+        </div>
+        <div><div class="cl"><span class="lbl">Koffein-Dosis</span></div><div class="caf"><span class="big"><span id="cafVal">219</span> mg</span><span class="sm"><span id="cafTab">1</span> Tab · <span id="cafKk">3</span> mg/kg</span></div></div>
+      </div>
+
+      <div class="budget"><label>Koffein sonst heute <input id="otherCaf" type="number" min="0" value="0"> mg</label><span id="budgetLine"></span></div>
+
+
+      <div class="agewarn" id="ageWarn"></div>
+      <button type="button" class="opensettings" id="openSet">⚙ Form, Ziele &amp; Stoffe …</button>
+    </div>
+
+
+    <div class="batchbar">
+      <label class="bb-sel"><span class="bb-l">Batch</span><select id="batchSel"></select></label>
+      <button class="bb-edit" id="editBatch" data-open="mBatch">Bearbeiten ✎</button>
+    </div>
 
     <div class="summary">
       <div class="stat"><div class="v" id="totalGrams">205<span class="u"> g</span></div><div class="l">Batch gesamt</div></div>
@@ -434,6 +499,32 @@
       <div class="stat hl"><div class="v"><span id="totalCost">18,20</span><span class="u"> €</span></div><div class="l">Gesamtkosten</div></div>
     </div>
 
+<div class="card stackcard">
+      <div class="stackgrp"><div class="stgrp-h">Trainingstag</div><div id="stTrain"></div></div>
+      <div class="stackgrp"><div class="stgrp-h">Nicht-Trainingstag</div><div id="stRest"></div></div>
+    </div>
+
+    <div class="infobar">
+      <button data-open="mSep">Separat – Details</button>
+      <button data-open="mDaily">Täglich – Details</button>
+      <button data-open="mPlan">Zeitplan</button>
+      <button data-open="mMix">Mischen &amp; portionieren</button>
+      <button data-open="mPump">Pump &amp; Hydration</button>
+      <button data-open="mNotes">Wichtige Hinweise</button>
+      <button data-open="mReady">Fertigprodukte</button>
+    </div>
+
+  </section>
+
+  <div class="modal" id="mBatch">
+    <div class="modal-bg" data-close></div>
+    <div class="modal-card">
+      <div class="modal-head"><span class="modal-title">Batch zusammenstellen</span><button class="drawer-close" data-close aria-label="Schließen">×</button></div>
+      <div class="modal-body">
+        <div class="batchmeta">
+          <label class="fld"><span>Name</span><input id="batchName" type="text" value="Mein Batch"></label>
+          <div class="batchacts"><button id="batchNew" type="button">+ Neuer</button><button id="batchDup" type="button">Duplizieren</button><button id="batchDel" type="button">Löschen</button></div>
+        </div>
     <div class="card">
       <div class="pricebasis"><span class="pb-l">Preisbasis</span><div class="seg" id="segPrice"><button type="button" data-v="hansen" class="on">Hansen</button><button type="button" data-v="bulk">Bulk-Richtwert</button><button type="button" data-v="live" id="liveBtn" disabled>Live</button></div><span class="livestatus" id="liveStatus"></span><button type="button" id="detBtn" class="detbtn">Details ▾</button></div>
       <table class="grid hide-src" id="batchTable">
@@ -448,14 +539,15 @@
       <div class="amp-legend"><span><i style="background:#16A34A"></i>fair</span><span><i style="background:#E0A100"></i>ok</span><span><i style="background:#DC2626"></i>teuer</span><span>· Hansen = Shop-Preis · Bulk = Richtwert (Stand Juni 2026)</span><span>· „vergleichen ↗“ öffnet die aktuelle Preissuche bei idealo</span></div>
       <button class="printbtn" id="printBtn">Etikett für die Dose drucken</button>
     </div>
+      </div>
+    </div>
+  </div>
 
-  </section>
-
-  <!-- 02 -->
-  <section class="reveal">
-    <details class="acc">
-      <summary><span class="ix" style="font-family:var(--mono);font-size:12px;font-weight:700;color:var(--acc);background:var(--acc-soft);width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center">02</span>Separat dosieren<span class="chev">▾</span></summary>
-      <div class="body">
+  <div class="modal" id="mSep">
+    <div class="modal-bg" data-close></div>
+    <div class="modal-card">
+      <div class="modal-head"><span class="modal-title">Separat dosieren</span><button class="drawer-close" data-close aria-label="Schließen">×</button></div>
+      <div class="modal-body">
         <p class="sub" style="margin-top:0">Kritisch oder hygroskopisch — gehört nie in den Batch, sondern frisch zur Portion.</p>
         <div class="card list">
       <div class="r"><div class="n">Koffein <span class="ev stark" title="Stärkster Wach-/Leistungsbooster; gut belegt für Fokus und Ausdauer.">stark</span></div><div class="d">aus Gewicht & Tablettengröße</div><div class="v live" id="cafRow">219 mg</div></div>
@@ -468,14 +560,14 @@
     </div>
         <p class="foot">Alpha-GPC und Glycerol zuletzt einrühren (ziehen schnell Wasser). Koffein, Tyrosin, Theanin und ggf. CDP-Cholin als Tablette/Kapsel zur Portion schlucken.</p>
       </div>
-    </details>
-  </section>
+    </div>
+  </div>
 
-  <!-- 03 -->
-  <section class="reveal">
-    <details class="acc">
-      <summary><span class="ix" style="font-family:var(--mono);font-size:12px;font-weight:700;color:var(--acc);background:var(--acc-soft);width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center">03</span>Täglich · auch an Ruhetagen<span class="chev">▾</span></summary>
-      <div class="body">
+  <div class="modal" id="mDaily">
+    <div class="modal-bg" data-close></div>
+    <div class="modal-card">
+      <div class="modal-head"><span class="modal-title">Täglich · auch an Ruhetagen</span><button class="drawer-close" data-close aria-label="Schließen">×</button></div>
+      <div class="modal-body">
         <p class="sub" style="margin-top:0">Wirkt über die Sättigung der Speicher (~1–2 Wochen). An trainingsfreien Tagen als Mini-Portion separat nehmen.</p>
         <div class="card list">
       <div class="r"><div class="n">Kreatin-Monohydrat <span class="ev stark" title="Am besten belegtes Supplement für Kraft & Muskelaufbau.">stark</span></div><div class="v">5 g</div></div>
@@ -490,14 +582,14 @@
       <p class="trk-note">Schätzung der Speicher-Sättigung ohne Ladephase: Kreatin/Beta-Alanin ~3–4 Wochen, Betain ~3 Wochen.</p>
     </div>
       </div>
-    </details>
-  </section>
+    </div>
+  </div>
 
-  <!-- 04 ZEITPLAN -->
-  <section class="reveal">
-    <details class="acc">
-      <summary><span class="ix" style="font-family:var(--mono);font-size:12px;font-weight:700;color:var(--acc);background:var(--acc-soft);width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center">04</span>Zeitplan · Trainingstag<span class="chev">▾</span></summary>
-      <div class="body">
+  <div class="modal" id="mPlan">
+    <div class="modal-bg" data-close></div>
+    <div class="modal-card">
+      <div class="modal-head"><span class="modal-title">Zeitplan · Trainingstag</span><button class="drawer-close" data-close aria-label="Schließen">×</button></div>
+      <div class="modal-body">
         <p class="sub" style="margin-top:0">Zwei Schritte: Pulver früh anrühren und mitnehmen, kurz vor dem Training trinken und die Kapseln dazu schlucken.</p>
         <div class="card tl">
       <div class="e"><div class="t">~2–3 h vorher<small>optional</small></div><div><h4>Nitrat (falls genutzt)</h4><ul><li>NO-Peak erst nach 2–3 h — nur relevant mit OxyStorm, dann vor dem Anrühren.</li></ul></div></div>
@@ -507,15 +599,14 @@
       <div class="e"><div class="t">Ruhetag<small>—</small></div><div><h4>Trainingsfreie Tage</h4><ul><li>Nur Kreatin (5 g) + Beta-Alanin (4 g) + Betain (2,5 g), Timing egal. Rest entfällt.</li></ul></div></div>
     </div>
       </div>
-    </details>
-  </section>
+    </div>
+  </div>
 
-  <!-- REFERENZ -->
-  <div class="divider"><span>Referenz</span><div class="line"></div></div>
-
-  <details class="acc">
-    <summary><span class="ix" style="font-family:var(--mono);font-size:12px;font-weight:700;color:var(--acc);background:var(--acc-soft);width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center">P</span>Pump &amp; Hydration<span class="chev">▾</span></summary>
-    <div class="body">
+  <div class="modal" id="mPump">
+    <div class="modal-bg" data-close></div>
+    <div class="modal-card">
+      <div class="modal-head"><span class="modal-title">Pump &amp; Hydration</span><button class="drawer-close" data-close aria-label="Schließen">×</button></div>
+      <div class="modal-body">
       <p class="sub" style="margin-top:0">Vier Stoffe, vier Mechanismen — sie addieren sich, statt sich zu überlappen.</p>
       <div class="mech">
         <div><b>Citrullin</b><span>NO über den Arginin-Weg</span></div>
@@ -525,11 +616,14 @@
       </div>
       <div class="callout"><b>Optionaler 3. NO-Weg:</b> Nitrat (z. B. OxyStorm, 1–2 g) über Nitrat→Nitrit→NO, eigenständig neben Citrullin. NO-Peak erst 2–3 h nach Einnahme, keine antibakterielle Mundspülung vorher. Eher Ausdauer-Nutzen.</div>
     </div>
-  </details>
+    </div>
+  </div>
 
-  <details class="acc">
-    <summary><span class="ix" style="font-family:var(--mono);font-size:12px;font-weight:700;color:var(--acc);background:var(--acc-soft);width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center">M</span>Mischen &amp; portionieren<span class="chev">▾</span></summary>
-    <div class="body">
+  <div class="modal" id="mMix">
+    <div class="modal-bg" data-close></div>
+    <div class="modal-card">
+      <div class="modal-head"><span class="modal-title">Mischen &amp; portionieren</span><button class="drawer-close" data-close aria-label="Schließen">×</button></div>
+      <div class="modal-body">
       <div class="player" id="player">
         <div class="pl-head"><b>Misch-Modus</b><span id="plProg"></span></div>
         <div class="pl-step" id="plStep"></div>
@@ -542,28 +636,35 @@
         <li>Zuckerfreies Aroma oder Geschmacks-EAA in den Batch — Citrullin/Beta-Alanin schmecken pur sauer.</li>
       </ol>
     </div>
-  </details>
+    </div>
+  </div>
 
-  <details class="acc">
-    <summary><span class="ix" style="font-family:var(--mono);font-size:12px;font-weight:700;color:var(--acc);background:var(--acc-soft);width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center">!</span>Wichtige Hinweise<span class="chev">▾</span></summary>
-    <div class="body">
+  <div class="modal" id="mNotes">
+    <div class="modal-bg" data-close></div>
+    <div class="modal-card">
+      <div class="modal-head"><span class="modal-title">Wichtige Hinweise</span><button class="drawer-close" data-close aria-label="Schließen">×</button></div>
+      <div class="modal-body">
       <div class="note"><b>Koffein nie schätzen.</b> Feinwaage (0,01 g) oder fixe Tablette. Tagesmenge im Blick behalten (Kaffee zählt mit), nicht nach ~15 Uhr — Schlaf schlägt jeden Booster.</div>
       <div class="note"><b>Elektrolyte: nur 1 Löffel.</b> Ein zweiter bringt 360 mg Magnesiumcarbonat auf einmal → kann auf den Magen gehen. Besser 1 Löffel + Prise Salz.</div>
       <div class="note"><b>Hygroskopisch (Alpha-GPC, Glycerol):</b> nie in den Batch. Zügig abwiegen, Dose sofort schließen, erst kurz vorm Trinken zugeben.</div>
       <div class="note"><b>Cholin:</b> Alpha-GPC ist die Cholinquelle der Wahl — beste Form mit etwas Power-Evidenz. Nicht zusätzlich Bitartrat stapeln.</div>
       <div class="note"><b>Beta-Alanin braucht keine Pause.</b> Wirkt über Carnosin-Sättigung — kein Toleranzeffekt, kein Zyklen nötig.</div>
     </div>
-  </details>
+    </div>
+  </div>
 
-  <details class="acc">
-    <summary><span class="ix" style="font-family:var(--mono);font-size:12px;font-weight:700;color:var(--acc);background:var(--acc-soft);width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center">F</span>Fertigprodukt-Alternativen<span class="chev">▾</span></summary>
-    <div class="body">
+  <div class="modal" id="mReady">
+    <div class="modal-bg" data-close></div>
+    <div class="modal-card">
+      <div class="modal-head"><span class="modal-title">Fertigprodukt-Alternativen</span><button class="drawer-close" data-close aria-label="Schließen">×</button></div>
+      <div class="modal-body">
       <div class="alt"><b>ESN Crank</b><span>Einsteiger/moderat — 6 g Citrullin-Malat, 200 mg Koffein, Tyrosin, Taurin.</span></div>
       <div class="alt"><b>VAST V8 Total Energy</b><span>Fast der ganze Stack — 6 g Citrullin-Malat, Beta-Alanin, Betain, Alpha-GPC, 280 mg Koffein.</span></div>
       <div class="alt"><b>Naughty Boy Menace</b><span>High-Stim — 4 g Citrullin, 3,2 g Beta-Alanin, 600 mg Alpha-GPC, 350 mg Koffein.</span></div>
       <p class="legend">Bei allen: Kreatin (5 g) separat ergänzen.</p>
     </div>
-  </details>
+    </div>
+  </div>
 
   <div class="divider" style="margin-top:54px"><span>Lager</span><div class="line"></div></div>
   <section class="reveal">
@@ -771,6 +872,14 @@
   seg('segChol',v=>{cholSrc=v;applyChol();});
   seg('segThe',v=>{theanin=(v==='on');applyThe();});
   $('detBtn').addEventListener('click',()=>{const t=$('batchTable');const h=t.classList.toggle('hide-src');$('detBtn').textContent=h?'Details ▾':'Details ▴';});
+  const _dr=$('drawer'),_sc=$('scrim');
+  function openD(){_dr.classList.add('open');_sc.classList.add('open');$('hambBtn').classList.add('open');}
+  function closeD(){_dr.classList.remove('open');_sc.classList.remove('open');$('hambBtn').classList.remove('open');}
+  $('hambBtn').addEventListener('click',()=>_dr.classList.contains('open')?closeD():openD());
+  $('scrim').addEventListener('click',closeD);
+  $('drawerClose').addEventListener('click',closeD);
+  $('openSet').addEventListener('click',openD);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeD();});
   $('trainDays').addEventListener('input',e=>{trainDays=parseInt(e.target.value)||1;$('tdVal').textContent=trainDays;invCalc();});
   $('leadDays').addEventListener('input',e=>{leadDays=Math.max(1,parseInt(e.target.value)||10);invCalc();});
   seg('segPrice',v=>{priceBasis=v;ING.forEach((x,i)=>{let p;if(v==='live')p=(x.live!=null?x.live:(x.hansen!=null?x.hansen:x.bulk));else if(v==='bulk')p=x.bulk;else p=(x.hansen!=null?x.hansen:x.bulk);x.price=p;const inp=document.querySelector('[data-p="'+i+'"]');if(inp)inp.value=p.toFixed(2);});renderRows();});
@@ -829,6 +938,7 @@
     else{sv.style.display='none';}
     updateExtras(target);
     invCalc();
+    renderStack();
   }
 
   // events
@@ -875,7 +985,49 @@
     $('cNm').value='';$('cDose').value='';$('cPrice').value='';$('cForm').value='pulver';$('custFields').style.display='none';$('addSel').value='';renderRows();
   });
 
+  // --- Stack-Ansicht (read-only) ---
+  function renderStack(){
+    const tr=$('stTrain'), rs=$('stRest'); if(!tr)return;
+    const li=(n,a)=>'<div class="sl"><span class="sl-n">'+n+'</span><span class="sl-a">'+a+'</span></div>';
+    const batch=ING.filter(x=>x.on&&x.form!=='kapsel'&&x.bx!==false);
+    let h='';
+    if(batch.length){ h+='<div class="sl-grp">Batch-Mischung <span class="sl-sum">'+gram(activeSum())+' / Portion</span></div>'+batch.map(x=>li(x.nm,gram(x.dose))).join(''); }
+    const seps=[];
+    ING.filter(x=>x.on&&(x.form==='kapsel'||x.bx===false)).forEach(x=>seps.push([x.nm,x.form==='kapsel'?(x.dose+'\u00d7 Kps'):gram(x.dose)]));
+    const map={caf:'cafRow',gly:'glyVal',agpc:'agpcVal',cdp:'cdpVal',tyr:'tyrVal',ele:'eleVal',the:'theVal'};
+    SEPDEF.forEach(d=>{
+      if(d.key==='agpc'&&cholSrc!=='agpc')return;
+      if(d.key==='cdp'&&cholSrc!=='cdp')return;
+      if(d.key==='the'&&!theanin)return;
+      const el=document.getElementById(map[d.key]); if(el)seps.push([d.nm,el.textContent]);
+    });
+    if(seps.length){ h+='<div class="sl-grp" style="margin-top:16px">Separat dazu</div>'+seps.map(s=>li(s[0],s[1])).join(''); }
+    tr.innerHTML=h||'<div class="sl-empty">Noch keine Stoffe aktiv – im Batch-Fenster zusammenstellen.</div>';
+    const daily=ING.filter(x=>x.on&&(x.key==='kreatin'||x.key==='betaalanin'||x.key==='betain'));
+    rs.innerHTML=daily.length?('<div class="sl-grp">Sättigung · täglich</div>'+daily.map(x=>li(x.nm,gram(x.dose))).join('')):'<div class="sl-empty">keine täglichen Stoffe aktiv</div>';
+  }
+
+  // --- Mehrere Batches ---
+  function snapshot(){return JSON.parse(JSON.stringify(ING));}
+  function renderBatchSel(){ const sel=$('batchSel'); if(!sel)return; sel.innerHTML=batches.map((b,i)=>'<option value="'+i+'"'+(i===active?' selected':'')+'>'+b.name+'</option>').join(''); }
+  function loadBatch(i){ if(i===active||i<0||i>=batches.length)return; batches[active].ing=snapshot(); active=i; ING.splice(0,ING.length,...JSON.parse(JSON.stringify(batches[i].ing))); $('batchName').value=batches[i].name; renderRows(); renderBatchSel(); }
+  let batches=[{name:'Mein Batch',ing:snapshot()}], active=0;
+  $('batchSel').addEventListener('change',e=>loadBatch(+e.target.value));
+  $('batchName').addEventListener('input',e=>{batches[active].name=e.target.value||'Batch';renderBatchSel();});
+  $('batchNew').addEventListener('click',()=>{batches[active].ing=snapshot();batches.push({name:'Batch '+(batches.length+1),ing:snapshot()});active=batches.length-1;$('batchName').value=batches[active].name;renderBatchSel();renderRows();});
+  $('batchDup').addEventListener('click',()=>{batches[active].ing=snapshot();batches.push({name:batches[active].name+' (Kopie)',ing:snapshot()});active=batches.length-1;$('batchName').value=batches[active].name;renderBatchSel();renderRows();});
+  $('batchDel').addEventListener('click',()=>{if(batches.length<2)return;batches.splice(active,1);active=0;ING.splice(0,ING.length,...JSON.parse(JSON.stringify(batches[0].ing)));$('batchName').value=batches[0].name;renderBatchSel();renderRows();});
+
+  // --- Fenster (Modals) ---
+  function openModal(id){const m=document.getElementById(id);if(m)m.classList.add('open');}
+  document.addEventListener('click',e=>{
+    const o=e.target.closest('[data-open]'); if(o){openModal(o.dataset.open);return;}
+    if(e.target.closest('[data-close]')||e.target.classList.contains('modal-bg')){const m=e.target.closest('.modal');if(m)m.classList.remove('open');}
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal.open').forEach(m=>m.classList.remove('open'));});
+
   renderRows();
+  renderBatchSel();
 
   async function fetchLive(){
     const st=$('liveStatus');
