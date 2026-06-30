@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="de" data-theme="auto">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vitalstoffe · Täglich</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F6F9; --surface:#FFFFFF; --ink:#0F1116; --muted:#646B7A; --faint:#9AA0AD;
+    --hair:#ECEEF2; --hair-2:#F4F5F8;
+    --acc:#4F46E5; --acc-ink:#4338CA; --acc-soft:#EEEDFD; --acc-2:#7C74F0; --acc-3:#A9A4F6;
+    --shadow:0 1px 2px rgba(15,17,22,.04), 0 18px 40px -24px rgba(15,17,22,.22);
+    --shadow-sm:0 1px 2px rgba(15,17,22,.05), 0 6px 18px -12px rgba(15,17,22,.18);
+    --disp:'Bricolage Grotesque',system-ui,sans-serif; --body:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+  html[data-theme="dark"]{
+    --bg:#0E1015; --surface:#181C24; --ink:#EAECF2; --muted:#9BA2B2; --faint:#6A7180;
+    --hair:#272C36; --hair-2:#1E232C;
+    --acc:#7872F2; --acc-ink:#B7B1FB; --acc-soft:#211E36; --acc-2:#9A93F5; --acc-3:#7E77E8;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 18px 40px -24px rgba(0,0,0,.7);
+    --shadow-sm:0 1px 2px rgba(0,0,0,.5), 0 6px 18px -12px rgba(0,0,0,.6);
+  }
+  @media(prefers-color-scheme:dark){
+    html[data-theme="auto"]{
+      --bg:#0E1015; --surface:#181C24; --ink:#EAECF2; --muted:#9BA2B2; --faint:#6A7180;
+      --hair:#272C36; --hair-2:#1E232C;
+      --acc:#7872F2; --acc-ink:#B7B1FB; --acc-soft:#211E36; --acc-2:#9A93F5; --acc-3:#7E77E8;
+      --shadow:0 1px 2px rgba(0,0,0,.5), 0 18px 40px -24px rgba(0,0,0,.7);
+      --shadow-sm:0 1px 2px rgba(0,0,0,.5), 0 6px 18px -12px rgba(0,0,0,.6);
+    }
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html[data-theme="dark"] .card,html[data-theme="dark"] .stat,html[data-theme="dark"] footer{border:1px solid var(--hair)}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;padding:0 22px 100px;position:relative}
+  .wrap{max-width:780px;margin:0 auto}
+  a{color:var(--acc-ink)}
+  ::selection{background:var(--acc);color:#fff}
+
+  /* header */
+  header{padding:38px 0 8px}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:26px}
+  .back{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:7px;border:1px solid var(--hair);padding:7px 12px;border-radius:999px;background:var(--surface)}
+  .back:hover{border-color:var(--acc);color:var(--acc-ink)}
+  .seg{display:inline-flex;background:var(--hair-2);border-radius:11px;padding:3px}
+  .seg button{border:0;background:transparent;font-family:var(--mono);font-size:11px;color:var(--muted);padding:6px 11px;border-radius:8px;cursor:pointer;letter-spacing:.03em}
+  .seg button.on{background:var(--surface);color:var(--ink);box-shadow:var(--shadow-sm)}
+  .tag-top{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc-ink);background:var(--acc-soft);padding:7px 13px;border-radius:999px;margin-bottom:22px}
+  .tag-top .d{width:6px;height:6px;border-radius:50%;background:var(--acc)}
+  h1{font-family:var(--disp);font-weight:700;font-size:clamp(40px,8.5vw,70px);line-height:1;letter-spacing:-.025em}
+  h1 .g{background:linear-gradient(95deg,var(--acc),var(--acc-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{margin-top:18px;font-size:17px;color:var(--muted);max-width:56ch}
+
+  /* progress stat */
+  .progress{display:flex;align-items:center;gap:16px;margin:24px 0 8px;background:var(--surface);border-radius:16px;box-shadow:var(--shadow-sm);padding:16px 18px}
+  .progress .num{font-family:var(--disp);font-weight:700;font-size:30px;letter-spacing:-.02em;line-height:1}
+  .progress .num b{color:var(--acc-ink)}
+  .progress .lbl{font-size:13px;color:var(--muted)}
+  .bar{flex:1;height:8px;border-radius:99px;background:var(--hair-2);overflow:hidden;min-width:80px}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc-2));transition:width .35s ease}
+  .resetb{border:1px solid var(--hair);background:var(--surface);color:var(--muted);border-radius:9px;padding:6px 11px;font-size:11px;font-family:var(--mono);cursor:pointer}
+  .resetb:hover{border-color:var(--acc);color:var(--acc-ink)}
+
+  /* dividers + sections */
+  .divider{display:flex;align-items:center;gap:14px;margin:40px 0 4px}
+  .divider span{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+  .divider .line{flex:1;height:1px;background:var(--hair)}
+  .divider .when{font-family:var(--mono);font-size:11px;color:var(--acc-ink);background:var(--acc-soft);padding:4px 10px;border-radius:999px;letter-spacing:.04em}
+
+  .card{background:var(--surface);border-radius:20px;box-shadow:var(--shadow-sm);padding:8px 22px;margin-top:14px}
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* vital row */
+  .vrow{display:flex;gap:14px;padding:18px 0;border-top:1px solid var(--hair)}
+  .vrow:first-child{border-top:0}
+  .vchk{flex:none;cursor:pointer;user-select:none}
+  .vchk input{position:absolute;opacity:0;width:0;height:0}
+  .vtick{display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;border:2px solid var(--hair);color:transparent;font-size:14px;font-weight:700;transition:all .15s;margin-top:2px}
+  .vchk input:checked + .vtick{background:var(--acc);border-color:var(--acc);color:#fff}
+  .vtick::after{content:"✓"}
+  .vmain{flex:1;min-width:0}
+  .vhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .vhead h3{font-family:var(--disp);font-weight:600;font-size:18px;letter-spacing:-.01em}
+  .ev{display:inline-block;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:6px}
+  .ev.stark{background:#E7F7EC;color:#1E7A3D}
+  .ev.mittel{background:#FBF1D8;color:#9A6B06}
+  .ev.schwach{background:#F1F0FE;color:#6E66D6}
+  .vmeta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:9px 0 10px}
+  .dose{font-family:var(--mono);font-size:12.5px;color:var(--ink);background:var(--hair-2);padding:4px 9px;border-radius:8px}
+  .chip{font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);border:1px solid var(--hair);padding:3px 8px;border-radius:999px}
+  .vwhy{font-size:14.5px;color:var(--muted);margin-bottom:7px}
+  .vnote{font-size:13px;color:var(--faint)}
+  .vnote b{color:var(--muted);font-weight:600}
+
+  .note{background:var(--acc-soft);border-radius:14px;padding:14px 16px;font-size:13.5px;color:var(--acc-ink);margin-top:20px}
+  footer{margin-top:46px;padding:22px 0;border-top:1px solid var(--hair);font-size:12.5px;color:var(--faint);line-height:1.7}
+
+  @media(max-width:600px){
+    body{padding:0 16px 90px}
+    .vrow{padding:16px 0}
+    .card{padding:6px 16px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="top">
+      <a class="back" href="preworkout-protocol.html">← Pre-Workout</a>
+      <div class="seg" id="segTheme">
+        <button data-th="light">Hell</button>
+        <button data-th="dark">Dunkel</button>
+        <button data-th="auto" class="on">Auto</button>
+      </div>
+    </div>
+    <div class="tag-top"><span class="d"></span>Vitalstoffe</div>
+    <h1>Tägliche <span class="g">Vitalstoffe</span></h1>
+    <p class="lede">Acht Basis-Stoffe für Gesundheit und Regeneration, nach Einnahmezeitpunkt gruppiert. Pro Stoff: sinnvolle Dosis, Timing, Evidenzgrad und das Wichtigste zu Wirkung und Wechselwirkungen.</p>
+
+    <div class="progress">
+      <div class="num"><b id="pNum">0</b> / 8</div>
+      <div style="flex:1">
+        <div class="lbl">heute genommen</div>
+        <div class="bar"><i id="pBar"></i></div>
+      </div>
+      <button class="resetb" id="resetBtn">zurücksetzen</button>
+    </div>
+  </header>
+
+  <!-- MORGENS -->
+  <div class="divider"><span class="when">Morgens</span><div class="line"></div><span>mit Frühstück &amp; etwas Fett</span></div>
+  <section class="reveal">
+    <div class="card">
+
+      <div class="vrow">
+        <label class="vchk"><input type="checkbox" class="vbox"><span class="vtick"></span></label>
+        <div class="vmain">
+          <div class="vhead"><h3>Vitamin D3 + K2</h3><span class="ev stark">stark</span></div>
+          <div class="vmeta"><span class="dose">D3 2000–4000 IE · K2 (MK-7) 90–200 µg</span><span class="chip">morgens</span><span class="chip">mit Fett</span></div>
+          <p class="vwhy">D3 unterstützt Knochen, Immunsystem und Hormonhaushalt; K2 (MK-7) lenkt Kalzium in die Knochen statt in die Gefäße – die beiden ergänzen sich.</p>
+          <p class="vnote"><b>Hinweise:</b> Fettlöslich, daher mit einer fetthaltigen Mahlzeit. Höhere D3-Dosen idealerweise am Blutwert (25-OH-D, Ziel ~30–50 ng/ml) ausrichten. Bei Vitamin-K-Antagonisten (Blutverdünner) K2 ärztlich abklären.</p>
+        </div>
+      </div>
+
+      <div class="vrow">
+        <label class="vchk"><input type="checkbox" class="vbox"><span class="vtick"></span></label>
+        <div class="vmain">
+          <div class="vhead"><h3>Omega-3 (EPA/DHA)</h3><span class="ev stark">stark</span></div>
+          <div class="vmeta"><span class="dose">1–2 g EPA+DHA</span><span class="chip">zur Mahlzeit</span><span class="chip">EPA+DHA, nicht Fischöl gesamt</span></div>
+          <p class="vwhy">Entzündungsregulierend, gut belegt für Herz-Kreislauf und Triglyceride, unterstützt potenziell die Regeneration.</p>
+          <p class="vnote"><b>Hinweise:</b> Auf die reine EPA/DHA-Menge achten (nicht die Kapsel-Gesamtmenge). Hochdosiert leicht blutverdünnend. Vegan: Algenöl. Frische/Oxidation (Totox-Wert) beachten.</p>
+        </div>
+      </div>
+
+      <div class="vrow">
+        <label class="vchk"><input type="checkbox" class="vbox"><span class="vtick"></span></label>
+        <div class="vmain">
+          <div class="vhead"><h3>Coenzym Q10 (Ubiquinol)</h3><span class="ev mittel">mittel</span></div>
+          <div class="vmeta"><span class="dose">100–200 mg</span><span class="chip">mit Fett</span></div>
+          <p class="vwhy">Beteiligt an der Energiegewinnung in den Mitochondrien und wirkt antioxidativ. Besonders relevant unter Statinen und mit zunehmendem Alter.</p>
+          <p class="vnote"><b>Hinweise:</b> Ubiquinol ist besser bioverfügbar als Ubiquinon. Fettlöslich – zur fetthaltigen Mahlzeit.</p>
+        </div>
+      </div>
+
+      <div class="vrow">
+        <label class="vchk"><input type="checkbox" class="vbox"><span class="vtick"></span></label>
+        <div class="vmain">
+          <div class="vhead"><h3>Curcumin</h3><span class="ev mittel">mittel</span></div>
+          <div class="vmeta"><span class="dose">500–1000 mg</span><span class="chip">zur Mahlzeit</span><span class="chip">mit Piperin / formuliert</span></div>
+          <p class="vwhy">Entzündungs- und gelenkunterstützend. Roh ist Curcumin schlecht aufnehmbar – daher mit Piperin oder als Phytosom/Mizell-Formulierung.</p>
+          <p class="vnote"><b>Hinweise:</b> Leicht blutverdünnend. Piperin kann die Spiegel mancher Medikamente erhöhen – bei Dauermedikation abklären.</p>
+        </div>
+      </div>
+
+      <div class="vrow">
+        <label class="vchk"><input type="checkbox" class="vbox"><span class="vtick"></span></label>
+        <div class="vmain">
+          <div class="vhead"><h3>B-Komplex</h3><span class="ev stark">stark</span></div>
+          <div class="vmeta"><span class="dose">1 Kapsel (ausgewogen)</span><span class="chip">morgens</span></div>
+          <p class="vwhy">Unterstützt Energiestoffwechsel, Nerven und Methylierung. Besonders wichtig bei veganer Ernährung (B12).</p>
+          <p class="vnote"><b>Hinweise:</b> Morgens, da B-Vitamine wach machen können. Färbt den Urin gelb (B2, harmlos). Sehr hohe B6-Dosen über lange Zeit können Nerven schädigen.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABENDS -->
+  <div class="divider"><span class="when">Abends</span><div class="line"></div><span>zum Abendessen / vor dem Schlafen</span></div>
+  <section class="reveal">
+    <div class="card">
+
+      <div class="vrow">
+        <label class="vchk"><input type="checkbox" class="vbox"><span class="vtick"></span></label>
+        <div class="vmain">
+          <div class="vhead"><h3>Magnesium</h3><span class="ev stark">stark</span></div>
+          <div class="vmeta"><span class="dose">200–400 mg elementar</span><span class="chip">abends</span><span class="chip">Glycinat / Citrat</span></div>
+          <p class="vwhy">Wichtig für Muskel- und Nervenfunktion, Schlaf und Regeneration. Bisglycinat ist magenfreundlich und passt gut zum Abend.</p>
+          <p class="vnote"><b>Hinweise:</b> Auf „elementares" Magnesium achten (nicht das Salzgewicht). Citrat kann abführend wirken. Zeitlich von Zink etwas trennen.</p>
+        </div>
+      </div>
+
+      <div class="vrow">
+        <label class="vchk"><input type="checkbox" class="vbox"><span class="vtick"></span></label>
+        <div class="vmain">
+          <div class="vhead"><h3>Ashwagandha</h3><span class="ev mittel">mittel</span></div>
+          <div class="vmeta"><span class="dose">300–600 mg KSM-66</span><span class="chip">abends</span><span class="chip">kurmäßig</span></div>
+          <p class="vwhy">Adaptogen mit Hinweisen auf reduzierten Stress/Cortisol und bessere Schlafqualität.</p>
+          <p class="vnote"><b>Hinweise:</b> Kann Schilddrüsenhormone erhöhen – Vorsicht bei Schilddrüsenerkrankung. Nicht in der Schwangerschaft; Vorsicht bei Autoimmunerkrankungen und Beruhigungsmitteln. Eher kurweise statt dauerhaft.</p>
+        </div>
+      </div>
+
+      <div class="vrow">
+        <label class="vchk"><input type="checkbox" class="vbox"><span class="vtick"></span></label>
+        <div class="vmain">
+          <div class="vhead"><h3>Zink</h3><span class="ev stark">stark</span></div>
+          <div class="vmeta"><span class="dose">10–25 mg</span><span class="chip">zum Essen</span><span class="chip">getrennt von Mg / Eisen</span></div>
+          <p class="vwhy">Unterstützt Immunsystem und Haut; bei Mangel auch den Testosteronhaushalt.</p>
+          <p class="vnote"><b>Hinweise:</b> Dauerhafte Obergrenze ~40 mg/Tag. Langfristig hohe Zinkgaben können einen Kupfermangel begünstigen (ggf. Kupfer ergänzen). Nicht zusammen mit hochdosiertem Eisen oder Kalzium.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="note"><b>Hinweis:</b> Dies sind allgemeine, evidenzorientierte Richtwerte – keine medizinische Beratung. Sinnvoll ist es, zentrale Werte (z. B. Vitamin D, Ferritin, B12) per Blutbild zu prüfen und Dosierungen sowie Wechselwirkungen mit bestehenden Medikamenten ärztlich abzustimmen.</div>
+
+  <footer>
+    Vitalstoffe-Übersicht · ergänzend zum Pre-Workout-Protokoll. Richtwerte für eine erwachsene Person; individueller Bedarf variiert. Bei Erkrankungen, Schwangerschaft oder Dauermedikation vor der Einnahme ärztlich abklären.
+  </footer>
+
+</div>
+
+<script>
+  const $=id=>document.getElementById(id);
+
+  // Theme
+  const segTheme=$('segTheme');
+  segTheme.addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b)return;
+    document.documentElement.setAttribute('data-theme',b.dataset.th);
+    [...segTheme.children].forEach(c=>c.classList.remove('on')); b.classList.add('on');
+  });
+
+  // Tages-Checkliste
+  const boxes=[...document.querySelectorAll('.vbox')];
+  const total=boxes.length;
+  function upd(){
+    const n=boxes.filter(b=>b.checked).length;
+    $('pNum').textContent=n;
+    $('pBar').style.width=(n/total*100)+'%';
+  }
+  boxes.forEach(b=>b.addEventListener('change',upd));
+  $('resetBtn').addEventListener('click',()=>{boxes.forEach(b=>b.checked=false);upd();});
+  upd();
+
+  // Reveal
+  const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
