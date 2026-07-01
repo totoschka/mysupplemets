@@ -234,6 +234,9 @@
   .adv-in:focus{outline:none;border-color:var(--acc);background:#fff}
   .adv-unit{display:inline-flex;align-items:center;gap:6px}
   .adv-unit em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--faint);width:20px}
+  .frow.rowoff{opacity:.45}
+  .tobatch.out{margin-left:8px;opacity:.7;font-weight:500}
+  .son-cb{vertical-align:middle;margin-right:2px}
   .adv-note{font-size:11px;color:var(--faint);margin-top:12px;line-height:1.5}
   .adv-sep{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:600;margin:18px 0 4px;padding-top:14px;border-top:1px solid var(--hair)}
   .adv-sep.first{margin-top:6px;padding-top:0;border-top:none}
@@ -376,6 +379,41 @@
   .batchacts{display:flex;gap:8px;flex-wrap:wrap}
   .batchacts button{border:1px solid var(--hair);background:var(--surface);color:var(--muted);border-radius:9px;padding:8px 12px;font-size:12px;cursor:pointer}
   .batchacts button:hover{border-color:var(--acc);color:var(--acc-ink)}
+  .batchlistcard{margin-top:18px}
+  .bl-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 0 10px}
+  .bl-title{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:600}
+  .bl-add{border:1px solid var(--acc);background:var(--acc-soft);color:var(--acc-ink);border-radius:9px;padding:7px 12px;font-size:12px;font-weight:600;cursor:pointer}
+  .bl-add:hover{background:var(--acc);color:#fff}
+  .batchrow{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;border:0;border-top:1px solid var(--hair);background:transparent;padding:14px 4px;cursor:pointer;font-family:var(--body);border-radius:8px}
+  .batchrow:hover{background:var(--hair-2)}
+  .batchrow.active{background:var(--acc-soft)}
+  .br-main{display:flex;flex-direction:column;gap:3px;min-width:0;align-items:flex-start}
+  .br-name{font-family:var(--disp);font-weight:600;font-size:17px;color:var(--ink)}
+  .br-meta{font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .br-tag{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--acc-ink);background:var(--surface);border:1px solid var(--acc);padding:3px 8px;border-radius:999px;white-space:nowrap}
+  .br-go{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+  .sl.batchline{display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;border:1px solid var(--acc);background:var(--acc-soft);cursor:pointer;font-family:var(--body);border-radius:12px;padding:13px 14px;margin-bottom:8px;text-align:left}
+  .sl.batchline:hover{border-color:var(--acc-ink)}
+  .sl.batchline .sl-n{font-family:var(--disp);font-weight:600;font-size:16px;color:var(--acc-ink)}
+  .sl.batchline .sl-a{color:var(--acc-ink);font-weight:600}
+  .sl-sub{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--muted);letter-spacing:0;display:block;margin-top:2px}
+  .catblock{border-radius:14px;padding:2px 14px 12px;margin-top:12px}
+  .cat-h{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;padding:12px 0 2px}
+  .catblock .sl{border-top:1px solid rgba(130,130,130,.16)}
+  .cat-sep{background:#E9F6F1}
+  .cat-sep .cat-h,.cat-sep .sl-a{color:#1E7A5B}
+  .cat-rest{background:#FBF1E2}
+  .cat-rest .cat-h,.cat-rest .sl-a{color:#8A5A12}
+  html[data-theme="dark"] .cat-sep{background:#15271F}
+  html[data-theme="dark"] .cat-sep .cat-h,html[data-theme="dark"] .cat-sep .sl-a{color:#82D9B5}
+  html[data-theme="dark"] .cat-rest{background:#2A2213}
+  html[data-theme="dark"] .cat-rest .cat-h,html[data-theme="dark"] .cat-rest .sl-a{color:#E2B978}
+  @media(prefers-color-scheme:dark){
+    html[data-theme="auto"] .cat-sep{background:#15271F}
+    html[data-theme="auto"] .cat-sep .cat-h,html[data-theme="auto"] .cat-sep .sl-a{color:#82D9B5}
+    html[data-theme="auto"] .cat-rest{background:#2A2213}
+    html[data-theme="auto"] .cat-rest .cat-h,html[data-theme="auto"] .cat-rest .sl-a{color:#E2B978}
+  }
   @media(max-width:600px){
     .ctrls{grid-template-columns:1fr;gap:22px}
     .opts{grid-template-columns:1fr}
@@ -428,16 +466,23 @@
         <div class="adv-sep">Optionen</div><div class="adv-cap">Koffein, Cholinquelle &amp; Theanin wirken auch in „Separat dosieren“.</div>
         <div class="opts">
           <div><div class="opt-l">Koffein-Intensität</div><div class="seg" id="segCaf"><button type="button" data-v="3" class="on">niedrig</button><button type="button" data-v="4.5">mittel</button><button type="button" data-v="6">hoch</button></div></div>
-          <div><div class="opt-l">Cholinquelle</div><div class="seg" id="segChol"><button type="button" data-v="agpc" class="on">Alpha-GPC</button><button type="button" data-v="cdp">CDP-Cholin</button></div></div>
+          <div><div class="opt-l">Cholinquelle</div><div class="seg" id="segChol"><button type="button" data-v="agpc" class="on">Alpha-GPC</button><button type="button" data-v="cdp">CDP-Cholin</button><button type="button" data-v="off">ohne</button></div></div>
           <div><div class="opt-l">L-Theanin</div><div class="seg" id="segThe"><button type="button" data-v="on" class="on">mit</button><button type="button" data-v="off">ohne</button></div></div>
         </div>
-        <div class="adv-sep">Form &amp; Dosierung</div><div class="adv-cap">Hier wählen, ob ein Stoff als Pulver oder Kapsel genutzt wird – die Listen unten richten sich danach.</div>
+        <div class="adv-sep">Form &amp; Dosierung</div><div class="adv-cap">Pulver oder Kapsel je Stoff. Kapsel bzw. kritische Stoffe wandern automatisch in „Separat“.</div>
         <div id="formGrid"></div>
-        <p class="adv-note">Pulver: Reinheit &lt;100 % erhöht Abwiegemenge und Kosten. Kapsel: mg/Stück bestimmt die Stückzahl.</p>
-        <div class="adv-sep">Stoff hinzufügen</div><div class="adv-cap">Vorlage wählen oder Eigenes anlegen – ob Pulver oder Kapsel wird oben unter „Form &amp; Dosierung“ festgelegt.</div>
+        <p class="adv-note">Pulver: Reinheit &lt;100 % erhöht Abwiegemenge. Kapsel: mg/Stück bestimmt die Stückzahl.</p>
+        <div class="adv-sep">Supplement hinzufügen</div><div class="adv-cap">Vorlage laden oder Eigenes anlegen. Einnahme wählen: „im Batch“ (wird mitgemischt) oder „separat“. Pulver/Kapsel je Stoff änderst du oben.</div>
       <div class="addbar">
         <select id="addSel">
-          <option value="">+ Supplement hinzufügen …</option>
+          <option value="">+ Vorlage laden …</option>
+          <optgroup label="Basis / Batch">
+            <option value="b_citrullin">L-Citrullin (7 g)</option>
+            <option value="b_kreatin">Kreatin-Monohydrat (5 g)</option>
+            <option value="b_betaalanin">Beta-Alanin (4 g)</option>
+            <option value="b_betain">Betain / TMG (2,5 g)</option>
+            <option value="b_taurin">L-Taurin (2 g)</option>
+          </optgroup>
           <optgroup label="Übliche Zusätze">
             <option value="citmal">Citrullin-Malat (8 g)</option>
             <option value="arginin">L-Arginin (3 g)</option>
@@ -455,12 +500,14 @@
         </select>
         <div class="cust" id="custFields" style="display:none">
           <input id="cNm" placeholder="Name">
-          <select id="cForm" class="num"><option value="pulver">Pulver</option><option value="kapsel">Kapsel</option></select>
+          <select id="cUse" class="num"><option value="batch">im Batch</option><option value="sep">separat</option></select><select id="cForm" class="num"><option value="pulver">Pulver</option><option value="kapsel">Kapsel</option></select>
           <input id="cDose" class="num" type="number" step="0.1" min="0" placeholder="Menge/Portion">
           <input id="cPrice" class="num" type="number" step="0.01" min="0" placeholder="Preis/Einheit">
           <button id="cAdd" type="button">Hinzufügen</button>
         </div>
       </div>
+        <div id="sepWrap" style="display:none"><div class="adv-sub" style="margin:18px 0 6px">Nicht im Batch · separat dosieren</div><div id="sepList"></div></div>
+
 
     </div>
   </aside>
@@ -493,13 +540,7 @@
       <button class="bb-edit" id="editBatch" data-open="mBatch">Bearbeiten ✎</button>
     </div>
 
-    <div class="summary">
-      <div class="stat"><div class="v" id="totalGrams">205<span class="u"> g</span></div><div class="l">Batch gesamt</div></div>
-      <div class="stat"><div class="v"><span id="perPortion">1,82</span><span class="u"> €</span></div><div class="l">pro Portion</div></div>
-      <div class="stat hl"><div class="v"><span id="totalCost">18,20</span><span class="u"> €</span></div><div class="l">Gesamtkosten</div></div>
-    </div>
-
-<div class="card stackcard">
+    <div class="card stackcard">
       <div class="stackgrp"><div class="stgrp-h">Trainingstag</div><div id="stTrain"></div></div>
       <div class="stackgrp"><div class="stgrp-h">Nicht-Trainingstag</div><div id="stRest"></div></div>
     </div>
@@ -512,6 +553,7 @@
       <button data-open="mPump">Pump &amp; Hydration</button>
       <button data-open="mNotes">Wichtige Hinweise</button>
       <button data-open="mReady">Fertigprodukte</button>
+      <button data-open="mLager">Lager &amp; Nachkauf</button>
     </div>
 
   </section>
@@ -525,18 +567,19 @@
           <label class="fld"><span>Name</span><input id="batchName" type="text" value="Mein Batch"></label>
           <div class="batchacts"><button id="batchNew" type="button">+ Neuer</button><button id="batchDup" type="button">Duplizieren</button><button id="batchDel" type="button">Löschen</button></div>
         </div>
+    <div class="summary">
+      <div class="stat"><div class="v" id="totalGrams">205<span class="u"> g</span></div><div class="l">Batch gesamt</div></div>
+      <div class="stat"><div class="v"><span id="perPortion">20,5</span><span class="u"> g</span></div><div class="l">pro Portion</div></div>
+    </div>
     <div class="card">
-      <div class="pricebasis"><span class="pb-l">Preisbasis</span><div class="seg" id="segPrice"><button type="button" data-v="hansen" class="on">Hansen</button><button type="button" data-v="bulk">Bulk-Richtwert</button><button type="button" data-v="live" id="liveBtn" disabled>Live</button></div><span class="livestatus" id="liveStatus"></span><button type="button" id="detBtn" class="detbtn">Details ▾</button></div>
-      <table class="grid hide-src" id="batchTable">
-        <thead><tr><th>Batch-Stoff</th><th>Dosis</th><th>Menge</th><th>Preis</th><th>Kosten</th></tr></thead>
+      <table class="grid" id="batchTable">
+        <thead><tr><th>Batch-Stoff</th><th>Dosis</th><th>Menge</th></tr></thead>
         <tbody id="rows"></tbody>
-        <tfoot><tr><td>Summe</td><td data-label="Dosis" id="sumDose">20,5 g</td><td data-label="Menge" id="sumGrams">205 g</td><td class="hide-m"></td><td class="cost" data-label="Kosten" id="sumCost">18,20 €</td></tr></tfoot>
+        <tfoot><tr><td>Summe</td><td data-label="Dosis" id="sumDose">20,5 g</td><td data-label="Menge" id="sumGrams">205 g</td></tr></tfoot>
       </table>
       <div class="tplbar"><span style="font-size:13px;color:var(--muted);font-weight:500">Vorlage</span><select id="tplSel"><option value="">Batch-Vorschlag laden …</option><option value="standard">Standard · evidenzbasiert</option><option value="pump">Pump-Fokus</option><option value="budget">Budget-Minimal</option><option value="ausdauer">Ausdauer / Cardio</option></select></div>
-      <div id="sepWrap" style="display:none"><div class="adv-sub" style="margin:18px 0 6px">Nicht im Batch · separat dosieren</div><div id="sepList"></div></div>
+      <div id="batchAdd"></div>
       <div class="profnote" id="profNote"></div>
-      <div class="savings" id="savings"></div>
-      <div class="amp-legend"><span><i style="background:#16A34A"></i>fair</span><span><i style="background:#E0A100"></i>ok</span><span><i style="background:#DC2626"></i>teuer</span><span>· Hansen = Shop-Preis · Bulk = Richtwert (Stand Juni 2026)</span><span>· „vergleichen ↗“ öffnet die aktuelle Preissuche bei idealo</span></div>
       <button class="printbtn" id="printBtn">Etikett für die Dose drucken</button>
     </div>
       </div>
@@ -550,12 +593,12 @@
       <div class="modal-body">
         <p class="sub" style="margin-top:0">Kritisch oder hygroskopisch — gehört nie in den Batch, sondern frisch zur Portion.</p>
         <div class="card list">
-      <div class="r"><div class="n">Koffein <span class="ev stark" title="Stärkster Wach-/Leistungsbooster; gut belegt für Fokus und Ausdauer.">stark</span></div><div class="d">aus Gewicht & Tablettengröße</div><div class="v live" id="cafRow">219 mg</div></div>
-      <div class="r"><div class="n">Glycerol (GlycoPump) <span class="ev mittel" title="Hyperhydration – Wasser in Muskel & Blut; unterstützt Pump.">mittel</span></div><div class="d">Hyperhydration</div><div class="v" id="glyVal">1 Portion</div></div>
+      <div class="r" id="rowCaf"><div class="n">Koffein <span class="ev stark" title="Stärkster Wach-/Leistungsbooster; gut belegt für Fokus und Ausdauer.">stark</span></div><div class="d">aus Gewicht & Tablettengröße</div><div class="v live" id="cafRow">219 mg</div></div>
+      <div class="r" id="rowGly"><div class="n">Glycerol (GlycoPump) <span class="ev mittel" title="Hyperhydration – Wasser in Muskel & Blut; unterstützt Pump.">mittel</span></div><div class="d">Hyperhydration</div><div class="v" id="glyVal">1 Portion</div></div>
       <div class="r" id="rowAgpc"><div class="n">Alpha-GPC <span class="ev mittel" title="Cholinquelle mit Hinweisen auf mehr Output/Power; moderat belegt.">mittel</span></div><div class="d">Power-Form, erste Wahl fürs Training</div><div class="v" id="agpcVal">0,4 g</div></div>
       <div class="r" id="rowCdp"><div class="n">CDP-Cholin / Citicolin <span class="ev schwach" title="Eher Kognition als Kraft; für Pre-Workout-Power schwächer belegt.">schwach</span></div><div class="d">Alternative zu Alpha-GPC (eher Kognition)</div><div class="v" id="cdpVal">1 Kapsel · 250 mg</div></div>
-      <div class="r"><div class="n">L-Tyrosin <span class="ev mittel" title="Kann Fokus unter Stress/Müdigkeit stützen; moderate Evidenz.">mittel</span></div><div class="d">mentaler Fokus · Ziel ~1500 mg</div><div class="v" id="tyrVal">2 Kapseln</div></div>
-      <div class="r"><div class="n">Elektrolyte + Prise Salz <span class="ev mittel" title="Wichtig bei Schweißverlust; Leistungseffekt kontextabhängig.">mittel</span></div><div class="d">~400 mg Na</div><div class="v" id="eleVal">1 Löffel</div></div>
+      <div class="r" id="rowTyr"><div class="n">L-Tyrosin <span class="ev mittel" title="Kann Fokus unter Stress/Müdigkeit stützen; moderate Evidenz.">mittel</span></div><div class="d">mentaler Fokus · Ziel ~1500 mg</div><div class="v" id="tyrVal">2 Kapseln</div></div>
+      <div class="r" id="rowEle"><div class="n">Elektrolyte + Prise Salz <span class="ev mittel" title="Wichtig bei Schweißverlust; Leistungseffekt kontextabhängig.">mittel</span></div><div class="d">~400 mg Na</div><div class="v" id="eleVal">1 Löffel</div></div>
       <div class="r" id="rowThe"><div class="n">L-Theanin (optional) <span class="ev mittel" title="Glättet Koffein-Nervosität; Koffein+Theanin gut für Fokus belegt.">mittel</span></div><div class="d">glättet Koffein · Ziel ~200 mg</div><div class="v" id="theVal">1 Kapsel</div></div>
     </div>
         <p class="foot">Alpha-GPC und Glycerol zuletzt einrühren (ziehen schnell Wasser). Koffein, Tyrosin, Theanin und ggf. CDP-Cholin als Tablette/Kapsel zur Portion schlucken.</p>
@@ -666,26 +709,30 @@
     </div>
   </div>
 
-  <div class="divider" style="margin-top:54px"><span>Lager</span><div class="line"></div></div>
-  <section class="reveal">
-    <div class="toolbox">
-      <details class="acc" open>
-      <summary><span class="ix" style="font-family:var(--mono);font-size:12px;font-weight:700;color:var(--acc);background:var(--acc-soft);width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center">L</span>Bestand &amp; Nachkauf<span class="chev">▾</span></summary>
-      <div class="body">
+  <div class="modal" id="mLager">
+    <div class="modal-bg" data-close></div>
+    <div class="modal-card">
+      <div class="modal-head"><span class="modal-title">Lager &amp; Nachkauf</span><button class="drawer-close" data-close aria-label="Schließen">×</button></div>
+      <div class="modal-body">
+        <div class="adv-sub" style="margin-top:0">Preise & Kosten</div>
+        <div class="pricebasis"><span class="pb-l">Preisbasis</span><div class="seg" id="segPrice"><button type="button" data-v="hansen" class="on">Hansen</button><button type="button" data-v="bulk">Bulk-Richtwert</button><button type="button" data-v="live" id="liveBtn" disabled>Live</button></div><span class="livestatus" id="liveStatus"></span></div>
+        <div class="summary" style="margin:12px 0 0"><div class="stat hl"><div class="v"><span id="batchCost">0</span><span class="u"> €</span></div><div class="l">Batch-Kosten gesamt</div></div></div>
+        <div class="savings" id="savings"></div>
+        <p class="sub">Preise pro Gramm bzw. Stück. „Preisbasis“ füllt Richtwerte ein; einzeln überschreibbar. Ampel: grün fair · gelb ok · rot teuer.</p>
+        <div class="adv-sub" style="margin-top:20px">Bestand & Nachkauf</div>
         <p class="sub" style="margin-top:0">Bestand pro Stoff eintragen — die Prognose zeigt Reichweite und Nachkauf-Zeitpunkt. Grundlage sind die Dosierungen oben und die Nutzungshäufigkeit.</p>
         <div class="invctrl">
           <div style="flex:1;min-width:200px"><div class="cl"><span class="lbl">Trainingstage / Woche</span><span class="cv"><span id="tdVal">4</span>×</span></div><input type="range" id="trainDays" min="1" max="7" step="1" value="4"></div>
           <label class="invlead">Vorlauf bis Nachkauf <input type="number" id="leadDays" min="1" value="10"> Tage</label>
         </div>
         <table class="grid inv">
-          <thead><tr><th>Stoff</th><th>Bestand</th><th>Verbrauch/Wo.</th><th>reicht für</th><th>Status</th></tr></thead>
+          <thead><tr><th>Stoff</th><th>Bestand</th><th>Preis</th><th>Verbrauch/Wo.</th><th>reicht für</th><th>Status</th></tr></thead>
           <tbody id="invRows"></tbody>
         </table>
         <p class="foot">Tägliche Stoffe (Kreatin, Beta-Alanin, Betain) zählen 7×/Woche, alle anderen an Trainingstagen. „leer am“ ist eine lineare Schätzung ab heute, ohne Ladephasen-Mehrverbrauch.</p>
       </div>
-      </details>
     </div>
-  </section>
+  </div>
 
   <footer>
     Kein ärztlicher Rat. Bei Bluthochdruck, Herz-Kreislauf-Problemen oder Medikamenten — besonders Koffein, Natrium und Nitrat (senkt Blutdruck) — vorher ärztlich abklären. Alpha-GPC nicht mit MAO-Hemmern kombinieren. Preise Stand der Abfrage, ohne Versand; Hansen Gratisversand ab 50 €.
@@ -697,6 +744,11 @@
 <script>
   const WORKER_URL='https://pricing-service-mimimi809.danubedata.run'; // <- DanubeData-Rapids-URL des Preis-Dienstes (siehe Anleitung)
   const PRESETS={
+    b_citrullin:{nm:'L-Citrullin',key:'citrullin',dose:7,hansen:0.12,bulk:0.04,good:0.05,ok:0.09,q:'L-Citrullin Pulver',ev:'stark',why:'NO-Vorstufe \u2192 Pump & Durchblutung; gut belegt.'},
+    b_kreatin:{nm:'Kreatin-Monohydrat',key:'kreatin',dose:5,bulk:0.02,good:0.03,ok:0.05,q:'Kreatin Monohydrat Pulver',ev:'stark',why:'Am besten belegtes Supplement f\u00fcr Kraft & Muskelaufbau.'},
+    b_betaalanin:{nm:'Beta-Alanin',key:'betaalanin',dose:4,bulk:0.03,good:0.04,ok:0.06,q:'Beta-Alanin Pulver',ev:'stark',why:'Erh\u00f6ht Muskel-Carnosin \u2192 S\u00e4urepuffer.'},
+    b_betain:{nm:'Betain (TMG)',key:'betain',dose:2.5,hansen:0.10,bulk:0.04,good:0.06,ok:0.10,q:'Betain Anhydrous TMG Pulver',ev:'mittel',why:'Osmolyt + Methylgruppen-Donor.'},
+    b_taurin:{nm:'L-Taurin',key:'taurin',dose:2,hansen:0.08,bulk:0.025,good:0.04,ok:0.07,q:'Taurin Pulver',ev:'mittel',why:'Zellvolumen/Antioxidans.'},
     citmal:{nm:'Citrullin-Malat',dose:8,bulk:0.03,good:0.04,ok:0.07,q:'Citrullin Malat Pulver',ev:'stark',why:'Citrullin als Malat-Variante – NO-Vorstufe für Pump, gut belegt.'},
     arginin:{nm:'L-Arginin',dose:3,bulk:0.03,good:0.04,ok:0.07,q:'L-Arginin Pulver',ev:'schwach',why:'Schlechte orale Bioverfügbarkeit – durch Citrullin überholt.'},
     glutamin:{nm:'L-Glutamin',dose:5,bulk:0.02,good:0.03,ok:0.05,q:'L-Glutamin Pulver',ev:'schwach',why:'Kaum Leistungs-/Aufbau-Effekt bei Gesunden mit ausreichend Protein.'},
@@ -741,7 +793,8 @@
     h+='<div class="adv-sub">Separat dosieren</div>';
     SEPDEF.forEach(d=>{
       const fm=sepForm[d.key], cap=(fm===d.alt);
-      h+='<div class="frow"><span class="fnm">'+d.nm+'</span>'
+      const son=(d.key in sepOn)?'<input type="checkbox" class="son-cb" data-son="'+d.key+'"'+(sepOn[d.key]?' checked':'')+'> ':'';
+      h+='<div class="frow'+((d.key in sepOn && !sepOn[d.key])?' rowoff':'')+'"><span class="fnm">'+son+d.nm+'</span>'
         +'<span class="seg mini" data-sseg="'+d.key+'"><button type="button" data-v="pulver"'+(fm==='pulver'?' class="on"':'')+'>Pulver</button><button type="button" data-v="'+d.alt+'"'+(cap?' class="on"':'')+'>'+d.altLabel+'</button></span>';
       if(cap) h+='<span class="fpar"><input class="adv-in" type="number" min="1" value="'+mgv[d.mg]+'" data-mg="'+d.mg+'"><em>mg/St</em></span>';
       else if(d.pur) h+='<span class="fpar"><input class="adv-in" type="number" min="1" max="100" value="'+purAgpcV+'" data-purx="agpc"><em>% rein</em></span>';
@@ -751,6 +804,11 @@
     g.innerHTML=h;
   }
 
+  function renderBatchAdd(){
+    const el=$('batchAdd'); if(!el)return;
+    const items=[]; ING.forEach((x,i)=>{ if(x.bx!==false && x.form==='kapsel') items.push([x,i]); });
+    el.innerHTML=items.length?('<div class="adv-sub" style="margin:16px 0 6px">In den Batch aufnehmen</div>'+items.map(([x,i])=>'<div class="sepitem"><label class="inc"><span>'+x.nm+'</span></label><button class="tobatch" data-tobatch="'+i+'">→ in den Batch</button></div>').join('')):'';
+  }
   function renderSepList(){
     const w=$('sepWrap'), l=$('sepList'); if(!l)return;
     const items=[]; ING.forEach((x,i)=>{ if(x.form==='kapsel'||x.bx===false) items.push([x,i]); });
@@ -759,23 +817,21 @@
     l.innerHTML=items.map(([x,i])=>{
       const cap=x.form==='kapsel';
       const ev=x.ev?' <span class="ev '+x.ev+'" title="'+(x.why||'').replace(/"/g,'&quot;')+'">'+x.ev+'</span>':'';
-      const rm=x.custom?'<button class="rm" data-rm="'+i+'" title="entfernen">×</button>':'';
-      const toB=(cap&&x.bx!==false)?'<button class="tobatch" data-tobatch="'+i+'">→ in den Batch</button>':'';
+      const rm='<button class="rm" data-rm="'+i+'" title="entfernen">×</button>';
+      const toB='';
       return '<div class="sepitem'+(x.on?'':' off')+'">'
         +'<label class="inc"><input type="checkbox" data-on="'+i+'"'+(x.on?' checked':'')+'><span>'+x.nm+ev+' '+rm+'</span></label>'
-        +'<span class="si-amt" data-g="'+i+'"></span>'
-        +'<span class="pricecell"><span class="amp" data-amp="'+i+'"></span><input class="price-in" type="number" step="0.01" min="0" value="'+x.price.toFixed(2)+'" data-p="'+i+'"><span class="punit">'+(cap?'€/St':'€/g')+'</span></span>'
-        +'<span class="cost" data-c="'+i+'"></span>'+toB+'</div>';
+        +'<span class="si-amt" data-g="'+i+'"></span>'+toB+'</div>';
     }).join('');
   }
 
   function invList(){
     const W=parseInt($('weight').value)||73, caf=Math.round(W*cafK/5)*5;
     const out=[];
-    ING.forEach(x=>{ if(!x.on)return;
+    ING.forEach((x,i)=>{ if(!x.on)return;
       const daily=(x.key==='kreatin'||x.key==='betaalanin'||x.key==='betain');
       const u=(x.form==='kapsel')?{a:x.dose,un:'Kps'}:{a:x.dose*100/x.pur,un:'g'};
-      out.push({id:'i:'+(x.key||x.nm),nm:x.nm,amt:u.a,unit:u.un,daily:daily});
+      out.push({id:'i:'+(x.key||x.nm),nm:x.nm,amt:u.a,unit:u.un,daily:daily,idx:i,price:x.price,cap:x.form==='kapsel'});
     });
     const sp={
       caf:(sepForm.caf==='pulver')?{a:caf/1000,un:'g'}:{a:Math.max(1,Math.round(caf/mgv.Caf)),un:'Tab'},
@@ -786,7 +842,7 @@
       gly:(sepForm.gly==='kapsel')?{a:Math.max(1,Math.round(2000/mgv.Gly)),un:'Kps'}:{a:1,un:'Portion'},
       ele:(sepForm.ele==='kapsel')?{a:Math.max(1,Math.round(400/mgv.Ele)),un:'Kps'}:{a:1,un:'L\u00f6ffel'}
     };
-    SEPDEF.forEach(d=>{ const u=sp[d.key]; out.push({id:'s:'+d.key,nm:d.nm,amt:u.a,unit:u.un,daily:false}); });
+    SEPDEF.forEach(d=>{ if((d.key==='agpc'&&cholSrc!=='agpc')||(d.key==='cdp'&&cholSrc!=='cdp')||(d.key==='the'&&!theanin)||sepOn[d.key]===false)return; const u=sp[d.key]; out.push({id:'s:'+d.key,nm:d.nm,amt:u.a,unit:u.un,daily:false}); });
     return out;
   }
 
@@ -795,6 +851,7 @@
     tb.innerHTML=invList().map(it=>
       '<tr><td data-label="Stoff">'+it.nm+'</td>'
       +'<td data-label="Bestand"><input class="stock-in" type="number" min="0" step="any" value="'+(stock[it.id]!=null?stock[it.id]:'')+'" data-stock="'+it.id+'" placeholder="0"><span class="punit">'+it.unit+'</span></td>'
+      +(it.idx!=null?'<td data-label="Preis"><input class="price-in inv-p" type="number" step="0.01" min="0" value="'+it.price.toFixed(2)+'" data-p="'+it.idx+'"><span class="punit">'+(it.cap?'\u20ac/St':'\u20ac/g')+'</span></td>':'<td data-label="Preis" class="dim">\u2014</td>')
       +'<td data-label="Verbrauch/Wo." data-vb="'+it.id+'"></td>'
       +'<td data-label="reicht f\u00fcr" data-rf="'+it.id+'"></td>'
       +'<td data-label="Status" data-st="'+it.id+'"></td></tr>'
@@ -825,33 +882,30 @@
       if(x.form==='kapsel'||x.bx===false)return;
       const cap=(x.form==='kapsel'), sep=(cap||x.bx===false);
       const pct=(x.on&&!sep&&as>0)?Math.round(x.dose/as*100):0;
-      const refs=(priceBasis==='bulk')?('Bulk ~'+egg(x.bulk)):(priceBasis==='live')?(x.live!=null?('Live ~'+egg(x.live)+(x.liveShop?' ('+x.liveShop+')':'')):'Live n/a'):(x.hansen!=null?('Hansen '+egg(x.hansen)):'Hansen n/a');
-      const rm=x.custom?'<button class="rm" data-rm="'+i+'" title="entfernen">×</button>':'';
+      const rm='<button class="rm" data-rm="'+i+'" title="entfernen">×</button>';
       const ev=x.ev?' <span class="ev '+x.ev+'" title="'+(x.why||'').replace(/"/g,'&quot;')+'">'+x.ev+'</span>':'';
       const tagSep=sep?'<span class="septag">separat</span> ':'';
-      const cmp='<a class="cmp" href="'+cmpUrl(x.q)+'" target="_blank" rel="noopener">vergleichen ↗</a>';
       let src;
-      if(cap){ src=tagSep+'Kapsel · pro Portion · '+cmp; }
-      else if(x.bx===false){ src=tagSep+'Pulver · hygroskopisch, nicht in den Batch · '+refs+' · '+cmp; }
-      else { src=(x.on?pct+'% Batch · ':'')+refs+' · '+cmp; }
+      if(cap){ src=tagSep+'Kapsel · pro Portion'; }
+      else if(x.bx===false){ src=tagSep+'Pulver · hygroskopisch, nicht in den Batch'; }
+      else { src=(x.on?pct+'% Batch':''); }
       const tr=document.createElement('tr');
       if(!x.on)tr.className='off';
       tr.innerHTML=
         '<td><label class="inc"><input type="checkbox" data-on="'+i+'"'+(x.on?' checked':'')+'><span>'+x.nm+rm+ev+'</span></label>'+
-          '<span class="src">'+src+'</span></td>'+
+          '<span class="src">'+src+'</span><button class="tobatch out" data-outbatch="'+i+'">aus Batch</button></td>'+
         '<td data-label="Dosis"><input class="dose-in" type="number" step="'+(cap?'1':'0.1')+'" min="0" value="'+x.dose+'" data-dose="'+i+'"><span class="punit">'+(cap?'Kps':'g')+'</span></td>'+
-        '<td data-label="Menge" data-g="'+i+'"></td>'+
-        '<td data-label="Preis"><div class="pricecell"><span class="amp" data-amp="'+i+'"></span><input class="price-in" type="number" step="0.01" min="0" value="'+x.price.toFixed(2)+'" data-p="'+i+'"><span class="punit">'+(cap?'€/St':'€/g')+'</span></div></td>'+
-        '<td class="cost" data-label="Kosten" data-c="'+i+'"></td>';
+        '<td data-label="Menge" data-g="'+i+'"></td>';
       rows.appendChild(tr);
     });
     renderSepList();
+    renderBatchAdd();
     renderSettings();
     renderInv();
     calc();
   }
 
-  let cafK=3, cholSrc='agpc', theanin=true, plI=0, sepForm={caf:'tablette',agpc:'pulver',tyr:'kapsel',the:'kapsel',cdp:'kapsel',gly:'pulver',ele:'pulver'};
+  let cafK=3, cholSrc='agpc', theanin=true, plI=0, sepOn={caf:true,tyr:true,gly:true,ele:true}, sepForm={caf:'tablette',agpc:'pulver',tyr:'kapsel',the:'kapsel',cdp:'kapsel',gly:'pulver',ele:'pulver'};
   const SEPDEF=[
     {key:'caf',nm:'Koffein',alt:'tablette',altLabel:'Tablette',mg:'Caf'},
     {key:'agpc',nm:'Alpha-GPC',alt:'kapsel',altLabel:'Kapsel',mg:'Agpc',pur:true},
@@ -867,11 +921,11 @@
   let trainDays=4, leadDays=10, stock={};
   function applyChol(){ $('rowAgpc').classList.toggle('muted',cholSrc!=='agpc'); $('rowCdp').classList.toggle('muted',cholSrc!=='cdp'); }
   function applyThe(){ $('rowThe').classList.toggle('muted',!theanin); }
+  function applySepOn(){ [['caf','rowCaf'],['gly','rowGly'],['tyr','rowTyr'],['ele','rowEle']].forEach(([k,r])=>{ const el=$(r); if(el)el.classList.toggle('muted',sepOn[k]===false); }); }
   function seg(id,cb){const g=$(id);g.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;[...g.children].forEach(c=>c.classList.remove('on'));b.classList.add('on');cb(b.dataset.v);});}
   seg('segCaf',v=>{cafK=parseFloat(v);calc();});
-  seg('segChol',v=>{cholSrc=v;applyChol();});
-  seg('segThe',v=>{theanin=(v==='on');applyThe();});
-  $('detBtn').addEventListener('click',()=>{const t=$('batchTable');const h=t.classList.toggle('hide-src');$('detBtn').textContent=h?'Details ▾':'Details ▴';});
+  seg('segChol',v=>{cholSrc=v;applyChol();calc();});
+  seg('segThe',v=>{theanin=(v==='on');applyThe();calc();});
   const _dr=$('drawer'),_sc=$('scrim');
   function openD(){_dr.classList.add('open');_sc.classList.add('open');$('hambBtn').classList.add('open');}
   function closeD(){_dr.classList.remove('open');_sc.classList.remove('open');$('hambBtn').classList.remove('open');}
@@ -883,7 +937,7 @@
   $('trainDays').addEventListener('input',e=>{trainDays=parseInt(e.target.value)||1;$('tdVal').textContent=trainDays;invCalc();});
   $('leadDays').addEventListener('input',e=>{leadDays=Math.max(1,parseInt(e.target.value)||10);invCalc();});
   seg('segPrice',v=>{priceBasis=v;ING.forEach((x,i)=>{let p;if(v==='live')p=(x.live!=null?x.live:(x.hansen!=null?x.hansen:x.bulk));else if(v==='bulk')p=x.bulk;else p=(x.hansen!=null?x.hansen:x.bulk);x.price=p;const inp=document.querySelector('[data-p="'+i+'"]');if(inp)inp.value=p.toFixed(2);});renderRows();});
-  applyChol(); applyThe();
+  applyChol(); applyThe(); applySepOn();
   const _root=document.documentElement;
   seg('segTheme',v=>_root.setAttribute('data-theme',v));
   _root.setAttribute('data-theme','auto');
@@ -930,15 +984,14 @@
     $('sumDose').textContent=gram(activeSum());
     $('totalGrams').innerHTML=Math.round(tg).toLocaleString('de-DE')+'<span class="u"> g</span>';
     $('sumGrams').textContent=gram(tg);
-    $('sumCost').textContent=eur(tc);
-    $('totalCost').textContent=eurp(tc);
-    $('perPortion').textContent=eurp(P>0?tc/P:0);
+    const _bc=$('batchCost'); if(_bc)_bc.textContent=eurp(tc);
+    $('perPortion').textContent=Math.round(tg/(P||1)).toLocaleString('de-DE');
     const sv=$('savings'), diff=tc-bulkTc;
-    if(diff>0.005){sv.style.display='block';sv.innerHTML='Bei Bulk-Richtwerten kostet dieselbe Charge <b>'+eur(bulkTc)+'</b> \u2014 Sparpotenzial <b>'+eur(diff)+'</b> ('+Math.round(diff/tc*100)+'\u202f%). Rote Ampeln zeigen, wo sich der Wechsel am meisten lohnt.';}
-    else{sv.style.display='none';}
+    if(sv){ if(diff>0.005){sv.style.display='block';sv.innerHTML='Bei Bulk-Richtwerten kostet dieselbe Charge <b>'+eur(bulkTc)+'</b> \u2014 Sparpotenzial <b>'+eur(diff)+'</b> ('+Math.round(diff/tc*100)+'\u202f%).';} else{sv.style.display='none';} }
     updateExtras(target);
     invCalc();
     renderStack();
+    renderBatchList();
   }
 
   // events
@@ -962,6 +1015,7 @@
     if(e.target.dataset.on!==undefined){ING[+e.target.dataset.on].on=e.target.checked;renderRows();}
     else if(e.target.dataset.form!==undefined){ING[+e.target.dataset.form].form=e.target.value;renderRows();}
     else if(e.target.dataset.sep!==undefined){sepForm[e.target.dataset.sep]=e.target.value;calc();}
+    else if(e.target.dataset.son!==undefined){sepOn[e.target.dataset.son]=e.target.checked;renderSettings();applySepOn();calc();}
   });
   document.addEventListener('click',e=>{
     const mini=e.target.closest('.seg.mini button');
@@ -970,19 +1024,23 @@
       else if(g.dataset.sseg!==undefined){sepForm[g.dataset.sseg]=mini.dataset.v;renderSettings();calc();}
       return; }
     if(e.target.dataset.tobatch!==undefined){ING[+e.target.dataset.tobatch].form='pulver';renderRows();return;}
+    if(e.target.dataset.outbatch!==undefined){ING[+e.target.dataset.outbatch].form='kapsel';renderRows();return;}
     if(e.target.dataset.rm!==undefined){ING.splice(+e.target.dataset.rm,1);renderRows();}
   });
 
   $('addSel').addEventListener('change',e=>{
     const v=e.target.value;
     if(v==='__custom'){$('custFields').style.display='flex';}
-    else if(v&&PRESETS[v]){const p=PRESETS[v];ING.push({nm:p.nm,dose:p.dose,form:'pulver',bx:p.bx,hansen:null,bulk:p.bulk,price:p.bulk,good:p.good,ok:p.ok,pur:100,on:true,custom:true,q:p.q,ev:p.ev,why:p.why});e.target.value='';$('custFields').style.display='none';renderRows();}
+    else if(v&&PRESETS[v]){const p=PRESETS[v];ING.push({nm:p.nm,key:p.key,dose:p.dose,form:'pulver',bx:p.bx,hansen:(p.hansen!=null?p.hansen:null),bulk:p.bulk,price:(p.hansen!=null?p.hansen:p.bulk),good:p.good,ok:p.ok,pur:100,on:true,custom:true,q:p.q,ev:p.ev,why:p.why});e.target.value='';$('custFields').style.display='none';renderRows();}
   });
   $('cAdd').addEventListener('click',()=>{
-    const nm=$('cNm').value.trim(), fm=$('cForm').value, d=parseFloat($('cDose').value)||0, pr=parseFloat($('cPrice').value)||0;
+    const nm=$('cNm').value.trim(), d=parseFloat($('cDose').value)||0, pr=parseFloat($('cPrice').value)||0;
+    const use=$('cUse')?$('cUse').value:'batch';
+    let fm=$('cForm').value, bx;
+    if(use==='batch'){ fm='pulver'; bx=undefined; } else { bx=false; }
     if(!nm||d<=0)return;
-    ING.push({nm:nm,dose:d,form:fm,hansen:null,bulk:(fm==='kapsel'?null:pr),price:pr,good:null,ok:null,pur:100,on:true,custom:true,q:nm+(fm==='kapsel'?' Kapseln':' Pulver')});
-    $('cNm').value='';$('cDose').value='';$('cPrice').value='';$('cForm').value='pulver';$('custFields').style.display='none';$('addSel').value='';renderRows();
+    ING.push({nm:nm,dose:d,form:fm,bx:bx,hansen:null,bulk:(fm==='kapsel'?null:pr),price:pr,good:null,ok:null,pur:100,on:true,custom:true,q:nm+(fm==='kapsel'?' Kapseln':' Pulver')});
+    $('cNm').value='';$('cDose').value='';$('cPrice').value='';$('cForm').value='pulver';if($('cUse'))$('cUse').value='batch';$('custFields').style.display='none';$('addSel').value='';renderRows();
   });
 
   // --- Stack-Ansicht (read-only) ---
@@ -991,7 +1049,7 @@
     const li=(n,a)=>'<div class="sl"><span class="sl-n">'+n+'</span><span class="sl-a">'+a+'</span></div>';
     const batch=ING.filter(x=>x.on&&x.form!=='kapsel'&&x.bx!==false);
     let h='';
-    if(batch.length){ h+='<div class="sl-grp">Batch-Mischung <span class="sl-sum">'+gram(activeSum())+' / Portion</span></div>'+batch.map(x=>li(x.nm,gram(x.dose))).join(''); }
+    if(batch.length){ h+='<button type="button" class="sl batchline" data-open="mBatch"><span class="sl-n">'+batches[active].name+' <span class="sl-sub">'+batch.length+' Stoffe gemischt</span></span><span class="sl-a">1 Portion · '+gram(activeSum())+'</span></button>'; }
     const seps=[];
     ING.filter(x=>x.on&&(x.form==='kapsel'||x.bx===false)).forEach(x=>seps.push([x.nm,x.form==='kapsel'?(x.dose+'\u00d7 Kps'):gram(x.dose)]));
     const map={caf:'cafRow',gly:'glyVal',agpc:'agpcVal',cdp:'cdpVal',tyr:'tyrVal',ele:'eleVal',the:'theVal'};
@@ -999,17 +1057,20 @@
       if(d.key==='agpc'&&cholSrc!=='agpc')return;
       if(d.key==='cdp'&&cholSrc!=='cdp')return;
       if(d.key==='the'&&!theanin)return;
+      if(sepOn[d.key]===false)return;
       const el=document.getElementById(map[d.key]); if(el)seps.push([d.nm,el.textContent]);
     });
-    if(seps.length){ h+='<div class="sl-grp" style="margin-top:16px">Separat dazu</div>'+seps.map(s=>li(s[0],s[1])).join(''); }
+    if(seps.length){ h+='<div class="catblock cat-sep"><div class="cat-h">Separat dazu</div>'+seps.map(s=>li(s[0],s[1])).join('')+'</div>'; }
     tr.innerHTML=h||'<div class="sl-empty">Noch keine Stoffe aktiv – im Batch-Fenster zusammenstellen.</div>';
     const daily=ING.filter(x=>x.on&&(x.key==='kreatin'||x.key==='betaalanin'||x.key==='betain'));
-    rs.innerHTML=daily.length?('<div class="sl-grp">Sättigung · täglich</div>'+daily.map(x=>li(x.nm,gram(x.dose))).join('')):'<div class="sl-empty">keine täglichen Stoffe aktiv</div>';
+    rs.innerHTML=daily.length?('<div class="catblock cat-rest"><div class="cat-h">Sättigung · täglich</div>'+daily.map(x=>li(x.nm,gram(x.dose))).join('')+'</div>'):'<div class="sl-empty">keine täglichen Stoffe aktiv</div>';
   }
 
   // --- Mehrere Batches ---
   function snapshot(){return JSON.parse(JSON.stringify(ING));}
-  function renderBatchSel(){ const sel=$('batchSel'); if(!sel)return; sel.innerHTML=batches.map((b,i)=>'<option value="'+i+'"'+(i===active?' selected':'')+'>'+b.name+'</option>').join(''); }
+  function renderBatchSel(){ const sel=$('batchSel'); if(sel) sel.innerHTML=batches.map((b,i)=>'<option value="'+i+'"'+(i===active?' selected':'')+'>'+b.name+'</option>').join(''); renderBatchList(); }
+  function batchMeta(ing){ const on=ing.filter(x=>x.on); const g=on.filter(x=>x.form!=='kapsel'&&x.bx!==false).reduce((a,x)=>a+(+x.dose||0),0); return on.length+' Stoffe \u00b7 '+gram(g)+' Batch/Portion'; }
+  function renderBatchList(){ const c=$('batchList'); if(!c)return; c.innerHTML=batches.map((b,i)=>{ const ing=(i===active)?ING:b.ing; return '<button type="button" class="batchrow'+(i===active?' active':'')+'" data-batch="'+i+'"><span class="br-main"><span class="br-name">'+b.name+'</span><span class="br-meta">'+batchMeta(ing)+'</span></span>'+(i===active?'<span class="br-tag">aktiv</span>':'<span class="br-go">\u00f6ffnen \u2192</span>')+'</button>'; }).join(''); }
   function loadBatch(i){ if(i===active||i<0||i>=batches.length)return; batches[active].ing=snapshot(); active=i; ING.splice(0,ING.length,...JSON.parse(JSON.stringify(batches[i].ing))); $('batchName').value=batches[i].name; renderRows(); renderBatchSel(); }
   let batches=[{name:'Mein Batch',ing:snapshot()}], active=0;
   $('batchSel').addEventListener('change',e=>loadBatch(+e.target.value));
@@ -1021,6 +1082,7 @@
   // --- Fenster (Modals) ---
   function openModal(id){const m=document.getElementById(id);if(m)m.classList.add('open');}
   document.addEventListener('click',e=>{
+    const bb=e.target.closest('[data-batch]'); if(bb){loadBatch(+bb.dataset.batch);openModal('mBatch');return;}
     const o=e.target.closest('[data-open]'); if(o){openModal(o.dataset.open);return;}
     if(e.target.closest('[data-close]')||e.target.classList.contains('modal-bg')){const m=e.target.closest('.modal');if(m)m.classList.remove('open');}
   });
