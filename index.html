@@ -463,11 +463,9 @@
           <div><div class="opt-l">Ziel</div><div class="seg" id="segGoal"><button type="button" data-v="erhalt" class="on">Erhalt</button><button type="button" data-v="cut">Cut</button><button type="button" data-v="aufbau">Aufbau</button></div></div>
           <div><div class="opt-l">Tag-Typ</div><div class="seg" id="segDay"><button type="button" data-v="hyp" class="on">Hypertrophie</button><button type="button" data-v="kraft">Kraft</button><button type="button" data-v="aus">Ausdauer</button></div></div>
         </div>
-        <div class="adv-sep">Optionen</div><div class="adv-cap">Koffein, Cholinquelle &amp; Theanin wirken auch in „Separat dosieren“.</div>
+        <div class="adv-sep">Optionen</div><div class="adv-cap">Koffein-Intensität in mg/kg. Cholinquelle und Theanin schaltest du unten in der Stoffliste ein/aus.</div>
         <div class="opts">
           <div><div class="opt-l">Koffein-Intensität</div><div class="seg" id="segCaf"><button type="button" data-v="3" class="on">niedrig</button><button type="button" data-v="4.5">mittel</button><button type="button" data-v="6">hoch</button></div></div>
-          <div><div class="opt-l">Cholinquelle</div><div class="seg" id="segChol"><button type="button" data-v="agpc" class="on">Alpha-GPC</button><button type="button" data-v="cdp">CDP-Cholin</button><button type="button" data-v="off">ohne</button></div></div>
-          <div><div class="opt-l">L-Theanin</div><div class="seg" id="segThe"><button type="button" data-v="on" class="on">mit</button><button type="button" data-v="off">ohne</button></div></div>
         </div>
         <div class="adv-sep">Form &amp; Dosierung</div><div class="adv-cap">Pulver oder Kapsel je Stoff. Kapsel bzw. kritische Stoffe wandern automatisch in „Separat“.</div>
         <div id="formGrid"></div>
@@ -842,7 +840,7 @@
       gly:(sepForm.gly==='kapsel')?{a:Math.max(1,Math.round(2000/mgv.Gly)),un:'Kps'}:{a:1,un:'Portion'},
       ele:(sepForm.ele==='kapsel')?{a:Math.max(1,Math.round(400/mgv.Ele)),un:'Kps'}:{a:1,un:'L\u00f6ffel'}
     };
-    SEPDEF.forEach(d=>{ if((d.key==='agpc'&&cholSrc!=='agpc')||(d.key==='cdp'&&cholSrc!=='cdp')||(d.key==='the'&&!theanin)||sepOn[d.key]===false)return; const u=sp[d.key]; out.push({id:'s:'+d.key,nm:d.nm,amt:u.a,unit:u.un,daily:false}); });
+    SEPDEF.forEach(d=>{ if(sepOn[d.key]===false)return; const u=sp[d.key]; out.push({id:'s:'+d.key,nm:d.nm,amt:u.a,unit:u.un,daily:false}); });
     return out;
   }
 
@@ -905,7 +903,7 @@
     calc();
   }
 
-  let cafK=3, cholSrc='agpc', theanin=true, plI=0, sepOn={caf:true,tyr:true,gly:true,ele:true}, sepForm={caf:'tablette',agpc:'pulver',tyr:'kapsel',the:'kapsel',cdp:'kapsel',gly:'pulver',ele:'pulver'};
+  let cafK=3, cholSrc='agpc', theanin=true, plI=0, sepOn={caf:true,agpc:true,cdp:false,tyr:true,the:true,gly:true,ele:true}, sepForm={caf:'tablette',agpc:'pulver',tyr:'kapsel',the:'kapsel',cdp:'kapsel',gly:'pulver',ele:'pulver'};
   const SEPDEF=[
     {key:'caf',nm:'Koffein',alt:'tablette',altLabel:'Tablette',mg:'Caf'},
     {key:'agpc',nm:'Alpha-GPC',alt:'kapsel',altLabel:'Kapsel',mg:'Agpc',pur:true},
@@ -919,13 +917,9 @@
   let purAgpcV=99;
   let priceBasis='hansen';
   let trainDays=4, leadDays=10, stock={};
-  function applyChol(){ $('rowAgpc').classList.toggle('muted',cholSrc!=='agpc'); $('rowCdp').classList.toggle('muted',cholSrc!=='cdp'); }
-  function applyThe(){ $('rowThe').classList.toggle('muted',!theanin); }
-  function applySepOn(){ [['caf','rowCaf'],['gly','rowGly'],['tyr','rowTyr'],['ele','rowEle']].forEach(([k,r])=>{ const el=$(r); if(el)el.classList.toggle('muted',sepOn[k]===false); }); }
+  function applySepOn(){ [['caf','rowCaf'],['agpc','rowAgpc'],['cdp','rowCdp'],['gly','rowGly'],['tyr','rowTyr'],['the','rowThe'],['ele','rowEle']].forEach(([k,r])=>{ const el=$(r); if(el)el.classList.toggle('muted',sepOn[k]===false); }); }
   function seg(id,cb){const g=$(id);g.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;[...g.children].forEach(c=>c.classList.remove('on'));b.classList.add('on');cb(b.dataset.v);});}
   seg('segCaf',v=>{cafK=parseFloat(v);calc();});
-  seg('segChol',v=>{cholSrc=v;applyChol();calc();});
-  seg('segThe',v=>{theanin=(v==='on');applyThe();calc();});
   const _dr=$('drawer'),_sc=$('scrim');
   function openD(){_dr.classList.add('open');_sc.classList.add('open');$('hambBtn').classList.add('open');}
   function closeD(){_dr.classList.remove('open');_sc.classList.remove('open');$('hambBtn').classList.remove('open');}
@@ -937,7 +931,7 @@
   $('trainDays').addEventListener('input',e=>{trainDays=parseInt(e.target.value)||1;$('tdVal').textContent=trainDays;invCalc();});
   $('leadDays').addEventListener('input',e=>{leadDays=Math.max(1,parseInt(e.target.value)||10);invCalc();});
   seg('segPrice',v=>{priceBasis=v;ING.forEach((x,i)=>{let p;if(v==='live')p=(x.live!=null?x.live:(x.hansen!=null?x.hansen:x.bulk));else if(v==='bulk')p=x.bulk;else p=(x.hansen!=null?x.hansen:x.bulk);x.price=p;const inp=document.querySelector('[data-p="'+i+'"]');if(inp)inp.value=p.toFixed(2);});renderRows();});
-  applyChol(); applyThe(); applySepOn();
+  applySepOn();
   const _root=document.documentElement;
   seg('segTheme',v=>_root.setAttribute('data-theme',v));
   _root.setAttribute('data-theme','auto');
@@ -1054,9 +1048,6 @@
     ING.filter(x=>x.on&&(x.form==='kapsel'||x.bx===false)).forEach(x=>seps.push([x.nm,x.form==='kapsel'?(x.dose+'\u00d7 Kps'):gram(x.dose)]));
     const map={caf:'cafRow',gly:'glyVal',agpc:'agpcVal',cdp:'cdpVal',tyr:'tyrVal',ele:'eleVal',the:'theVal'};
     SEPDEF.forEach(d=>{
-      if(d.key==='agpc'&&cholSrc!=='agpc')return;
-      if(d.key==='cdp'&&cholSrc!=='cdp')return;
-      if(d.key==='the'&&!theanin)return;
       if(sepOn[d.key]===false)return;
       const el=document.getElementById(map[d.key]); if(el)seps.push([d.nm,el.textContent]);
     });
